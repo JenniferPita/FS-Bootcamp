@@ -1,0 +1,67 @@
+/* =====================================================
+   BASE (reset, elementos globales, accesibilidad)
+====================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+/*
+  Transición suave de colores al cambiar de tema. Los elementos
+  con su propia transición (drawer, overlay, hamburguesa) la
+  conservan porque su selector es más específico que "*".
+*/
+*,
+*::before,
+*::after {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-base);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+/* =====================================================
+   ACCESSIBILITY
+====================================================== */
+
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.7rem var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-ink);
+  color: var(--color-ink-contrast);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}

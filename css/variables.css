@@ -1,0 +1,132 @@
+/* =====================================================
+   DESIGN TOKENS (colores, espaciado, tipografía)
+====================================================== */
+
+:root {
+  --color-bg: #f7f7f5;
+  --color-surface: #ffffff;
+  --color-header-bg: rgba(247, 247, 245, 0.95);
+  --color-surface-hover: #eeeeeb;
+  --color-dashboard-bg: #eaeae7;
+  --color-footer-bg: #eeeeeb;
+  --color-input-bg: #ffffff;
+  --color-input-border: #bcbcbc;
+  --color-window-dot: #c9c9c9;
+  --color-feature-icon-bg: #e9efff;
+  --color-client-text: #555555;
+  --color-text: #171717;
+  --color-muted: #626262;
+  --color-primary: #2457ff;
+  --color-primary-dark: #1741c7;
+  --color-border: #d8d8d8;
+  --color-success: #197a45;
+  --color-danger: #c0392b;
+
+  /*
+    "ink" es un acento oscuro constante (insignias, círculos,
+    bloque de resultados) que no cambia entre temas, a
+    diferencia de --color-text.
+  */
+  --color-ink: #121212;
+  --color-ink-contrast: #ffffff;
+
+  --radius-sm: 0.6rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+  --max-width: 1180px;
+
+  /*
+    ESPACIADO: escala reutilizada en margin/padding/gap.
+    El nombre --space-N corresponde a N * 0.25rem.
+  */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 1.75rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-14: 3.5rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* TIPOGRAFÍA */
+  --font-family-base:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  --line-height-base: 1.6;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.85rem;
+  --font-size-base: 1rem;
+  --font-size-md: 1.1rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 2.5rem;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+}
+
+/*
+  TEMA OSCURO: sigue la preferencia del sistema por defecto.
+  Si el usuario elige un tema manualmente con el botón, se
+  guarda en localStorage y se fuerza con [data-theme] en <html>.
+*/
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #121316;
+    --color-surface: #1c1d21;
+    --color-header-bg: rgba(18, 19, 22, 0.9);
+    --color-surface-hover: #26272c;
+    --color-dashboard-bg: #1a1b1f;
+    --color-footer-bg: #18191c;
+    --color-input-bg: #1c1d21;
+    --color-input-border: #45464c;
+    --color-window-dot: #45464c;
+    --color-feature-icon-bg: rgba(91, 134, 255, 0.16);
+    --color-client-text: #b7b8bd;
+    --color-text: #f2f2f0;
+    --color-muted: #a3a3a8;
+    --color-primary: #5b8aff;
+    --color-primary-dark: #7ea1ff;
+    --color-border: #34353b;
+    --color-success: #3ddc84;
+    --color-danger: #ff6b6b;
+    --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #121316;
+  --color-surface: #1c1d21;
+  --color-header-bg: rgba(18, 19, 22, 0.9);
+  --color-surface-hover: #26272c;
+  --color-dashboard-bg: #1a1b1f;
+  --color-footer-bg: #18191c;
+  --color-input-bg: #1c1d21;
+  --color-input-border: #45464c;
+  --color-window-dot: #45464c;
+  --color-feature-icon-bg: rgba(91, 134, 255, 0.16);
+  --color-client-text: #b7b8bd;
+  --color-text: #f2f2f0;
+  --color-muted: #a3a3a8;
+  --color-primary: #5b8aff;
+  --color-primary-dark: #7ea1ff;
+  --color-border: #34353b;
+  --color-success: #3ddc84;
+  --color-danger: #ff6b6b;
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+}

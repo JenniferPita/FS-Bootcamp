@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(command -v python3)",
+      "Bash(command -v python)",
+      "Bash(command -v npx)"
+    ]
+  }
+}

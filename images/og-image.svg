@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2457ff"/>
+      <stop offset="100%" stop-color="#1741c7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <rect x="120" y="180" width="96" height="96" rx="22" fill="#ffffff"/>
+  <text x="168" y="248" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="800" fill="#2457ff" text-anchor="middle">S</text>
+
+  <text x="240" y="252" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800" fill="#ffffff">StockFlow</text>
+
+  <text x="120" y="340" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="400" fill="#dce4ff">
+    Control de inventario simple para negocios que quieren crecer.
+  </text>
+</svg>

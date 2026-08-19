@@ -1,0 +1,152 @@
+/* =====================================================
+   RESPONSIVE (MOBILE-FIRST)
+   Los bloques base de los demás archivos son el diseño
+   para móvil. Estos "min-width" van sumando mejoras a
+   partir de tablet (621px) y escritorio (901px).
+
+   IMPORTANTE: este archivo debe importarse SIEMPRE al
+   final de css/styles.css. Varias reglas de aquí tienen
+   la misma especificidad que su regla base (definida en
+   otro archivo) y solo ganan porque se cargan después.
+====================================================== */
+
+@media (min-width: 621px) {
+  .header-inner {
+    gap: var(--space-8);
+  }
+
+  .logo {
+    font-size: 1.15rem;
+  }
+
+  .section {
+    padding-block: var(--space-20);
+  }
+
+  .hero {
+    padding-block: var(--space-16) var(--space-20);
+  }
+
+  .hero-actions {
+    flex-direction: row;
+  }
+
+  .hero-actions .button {
+    width: auto;
+  }
+
+  .features-grid,
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-brand {
+    grid-column: span 2;
+  }
+
+  .client-logo {
+    min-width: 180px;
+    height: 100px;
+    font-size: 1.15rem;
+  }
+
+  .form-contacto,
+  .price-card {
+    padding: var(--space-8);
+  }
+
+  .chatbot {
+    right: 1rem;
+    bottom: 1rem;
+  }
+}
+
+@media (min-width: 901px) {
+  .header-inner {
+    flex-wrap: nowrap;
+    min-height: 4.5rem;
+    padding-block: 0;
+  }
+
+  .nav-toggle,
+  .nav-overlay {
+    display: none;
+  }
+
+  .main-nav {
+    position: static;
+    z-index: auto;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    transition: none;
+  }
+
+  .main-nav ul {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .main-nav a {
+    padding: 0.55rem 0.85rem;
+    font-size: 0.95rem;
+  }
+
+  body.nav-open {
+    overflow: visible;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-copy {
+    text-align: left;
+  }
+
+  .hero-copy p {
+    margin-inline: 0;
+  }
+
+  .hero-actions {
+    justify-content: flex-start;
+  }
+
+  .contact-wrapper {
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+
+  .features-grid,
+  .pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+
+  .footer-brand {
+    grid-column: auto;
+  }
+}

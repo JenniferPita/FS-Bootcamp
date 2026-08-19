@@ -1,0 +1,16 @@
+/*
+  Este archivo es el punto de entrada del CSS del sitio.
+  El contenido está modularizado en variables.css, base.css,
+  layout.css, components.css y responsive.css (todos en
+  esta misma carpeta).
+
+  El ORDEN de los @import importa: responsive.css debe ir
+  siempre último (ver el comentario dentro de ese archivo).
+  No agregar imports nuevos después de ese.
+*/
+
+@import "variables.css";
+@import "base.css";
+@import "layout.css";
+@import "components.css";
+@import "responsive.css";
