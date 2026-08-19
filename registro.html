@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Regístrate gratis en StockFlow y empieza a controlar tu inventario en minutos: sin instalaciones, sin tarjeta de crédito y con soporte para tu equipo."
+  >
+
+  <title>StockFlow — Prueba gratis</title>
+
+  <meta property="og:title" content="StockFlow — Prueba gratis">
+  <meta
+    property="og:description"
+    content="Regístrate gratis en StockFlow y empieza a controlar tu inventario en minutos: sin instalaciones, sin tarjeta de crédito y con soporte para tu equipo."
+  >
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/registro.html">
+  <meta property="og:image" content="https://example.com/images/og-image.svg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StockFlow — Prueba gratis">
+  <meta
+    name="twitter:description"
+    content="Regístrate gratis en StockFlow y empieza a controlar tu inventario en minutos: sin instalaciones, sin tarjeta de crédito y con soporte para tu equipo."
+  >
+  <meta name="twitter:image" content="https://example.com/images/og-image.svg">
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        if (stored === "light" || stored === "dark") {
+          document.documentElement.setAttribute("data-theme", stored);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#contenido">
+    Saltar al contenido principal
+  </a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <a class="logo" href="index.html" aria-label="StockFlow, inicio">
+        <span class="logo-mark" aria-hidden="true">S</span>
+        StockFlow
+      </a>
+
+      <div class="header-actions">
+
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Cambiar a modo oscuro"
+        >
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="main-nav"
+          aria-label="Abrir menú de navegación"
+        >
+          <svg class="nav-icon nav-icon-menu" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 6h18M3 12h18M3 18h18"></path>
+          </svg>
+          <svg class="nav-icon nav-icon-back" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M19 12H5M11 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+
+        <nav id="main-nav" class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li>
+            <a href="index.html">Inicio</a>
+          </li>
+          <li>
+            <a href="precios.html">Precios</a>
+          </li>
+          <li>
+            <a href="index.html#contacto">Contacto</a>
+          </li>
+          <li>
+            <a class="header-cta" href="registro.html" aria-current="page">
+              Prueba gratis
+            </a>
+          </li>
+        </ul>
+        </nav>
+
+      </div>
+
+    </div>
+  </header>
+
+  <div class="nav-overlay"></div>
+
+  <main id="contenido">
+
+    <!-- =====================================================
+         REGISTRO
+    ====================================================== -->
+
+    <section id="registro" class="hero" aria-labelledby="signup-title">
+      <div class="container hero-grid">
+
+        <div class="hero-copy">
+
+          <span class="eyebrow">
+            Prueba gratis
+          </span>
+
+          <h1 id="signup-title">
+            Crea tu cuenta y controla tu inventario hoy mismo.
+          </h1>
+
+          <p>
+            Sin instalaciones, sin tarjeta de crédito. Regístrate en minutos
+            y empieza a gestionar productos, movimientos y alertas desde
+            una sola plataforma.
+          </p>
+
+          <ul class="contact-list">
+            <li>✓ 14 días de prueba gratuita</li>
+            <li>✓ Cancela cuando quieras</li>
+            <li>✓ Soporte incluido en todos los planes</li>
+          </ul>
+
+        </div>
+
+        <form
+          class="form-contacto"
+          action="#"
+          method="post"
+          aria-labelledby="signup-title"
+          novalidate
+        >
+
+          <div class="form-group">
+
+            <label for="nombre">
+              Nombre completo
+            </label>
+
+            <input
+              id="nombre"
+              name="nombre"
+              type="text"
+              autocomplete="name"
+              aria-describedby="nombre-error"
+              required
+            >
+
+            <p class="form-error" id="nombre-error" role="alert"></p>
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="empresa">
+              Empresa
+            </label>
+
+            <input
+              id="empresa"
+              name="empresa"
+              type="text"
+              autocomplete="organization"
+            >
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="email">
+              Correo electrónico
+            </label>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              aria-describedby="email-error"
+              required
+            >
+
+            <p class="form-error" id="email-error" role="alert"></p>
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="password">
+              Contraseña
+            </label>
+
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="new-password"
+              minlength="8"
+              aria-describedby="password-help password-error"
+              required
+            >
+
+            <p class="form-help" id="password-help">
+              Mínimo 8 caracteres.
+            </p>
+
+            <p class="form-error" id="password-error" role="alert"></p>
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="password-confirm">
+              Confirmar contraseña
+            </label>
+
+            <input
+              id="password-confirm"
+              name="password-confirm"
+              type="password"
+              autocomplete="new-password"
+              minlength="8"
+              aria-describedby="password-confirm-error"
+              required
+            >
+
+            <p class="form-error" id="password-confirm-error" role="alert"></p>
+
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label" for="terminos">
+              <input
+                id="terminos"
+                class="form-checkbox"
+                name="terminos"
+                type="checkbox"
+                aria-describedby="terminos-error"
+                required
+              >
+              <span>
+                Acepto los <a href="#">Términos de servicio</a> y la
+                <a href="#">Política de privacidad</a>.
+              </span>
+            </label>
+
+            <p class="form-error" id="terminos-error" role="alert"></p>
+
+          </div>
+
+          <button
+            class="button"
+            type="submit"
+          >
+            Crear cuenta gratis
+          </button>
+
+          <p class="form-help">
+            ¿Ya tienes una cuenta? <a href="#">Inicia sesión</a>.
+          </p>
+
+        </form>
+
+        <div class="form-feedback" role="status" aria-live="polite"></div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         PASOS SIGUIENTES
+    ====================================================== -->
+
+    <section class="section" aria-labelledby="next-steps-title">
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <span class="eyebrow">
+            Después de registrarte
+          </span>
+
+          <h2 id="next-steps-title">
+            Así de simple es empezar
+          </h2>
+
+          <p>
+            En pocos minutos tendrás tu inventario funcionando.
+          </p>
+
+        </header>
+
+        <div class="steps">
+
+          <article class="step">
+            <div class="step-number" aria-hidden="true">1</div>
+
+            <h3>
+              Confirma tu correo
+            </h3>
+
+            <p>
+              Recibirás un enlace de verificación para activar tu cuenta.
+            </p>
+          </article>
+
+          <article class="step">
+            <div class="step-number" aria-hidden="true">2</div>
+
+            <h3>
+              Importa tu inventario
+            </h3>
+
+            <p>
+              Carga tu catálogo existente o empieza desde cero.
+            </p>
+          </article>
+
+          <article class="step">
+            <div class="step-number" aria-hidden="true">3</div>
+
+            <h3>
+              Invita a tu equipo
+            </h3>
+
+            <p>
+              Agrega usuarios y define accesos según el plan elegido.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       FOOTER
+    ====================================================== -->
+
+  <footer class="site-footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a
+          class="logo"
+          href="index.html"
+          aria-label="StockFlow, inicio"
+        >
+          <span class="logo-mark" aria-hidden="true">S</span>
+          StockFlow
+        </a>
+
+        <p>
+          Control de inventario simple para negocios que quieren crecer.
+        </p>
+
+      </div>
+
+      <nav aria-label="Enlaces del producto">
+
+        <h2 class="footer-heading">
+          Producto
+        </h2>
+
+        <ul class="footer-links">
+          <li>
+            <a href="index.html#funcionalidades">
+              Funcionalidades
+            </a>
+          </li>
+
+          <li>
+            <a href="index.html#como-funciona">
+              Cómo funciona
+            </a>
+          </li>
+
+          <li>
+            <a href="precios.html">
+              Precios
+            </a>
+          </li>
+
+          <li>
+            <a href="index.html#faq-title">
+              Preguntas frecuentes
+            </a>
+          </li>
+        </ul>
+
+      </nav>
+
+      <nav aria-label="Enlaces de la empresa">
+
+        <h2 class="footer-heading">
+          Empresa
+        </h2>
+
+        <ul class="footer-links">
+
+          <li>
+            <a href="index.html#nosotros">
+              Nosotros
+            </a>
+          </li>
+
+          <li>
+            <a href="index.html#contacto">
+              Contacto
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Privacidad
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Términos
+            </a>
+          </li>
+
+        </ul>
+
+      </nav>
+
+    </div>
+
+    <div class="footer-bottom">
+
+      <div class="container">
+
+        <small>
+          © 2026 StockFlow. Todos los derechos reservados.
+        </small>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- Botón preparado para integrar posteriormente un chatbot -->
+  <button
+    class="chatbot"
+    type="button"
+    aria-label="Asistente de ayuda (próximamente)"
+    aria-disabled="true"
+  >
+    ?
+  </button>
+
+  <script src="js/nav.js" defer></script>
+  <script src="js/theme.js" defer></script>
+  <script src="js/registro-form.js" defer></script>
+
+</body>
+</html>

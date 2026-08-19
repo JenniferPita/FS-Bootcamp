@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="StockFlow es la plataforma para controlar tu inventario: gestiona productos, movimientos, alertas de stock bajo y métricas clave desde un solo lugar."
+  >
+
+  <title>StockFlow — Control de inventario simple</title>
+
+  <meta property="og:title" content="StockFlow — Control de inventario simple">
+  <meta
+    property="og:description"
+    content="StockFlow es la plataforma para controlar tu inventario: gestiona productos, movimientos, alertas de stock bajo y métricas clave desde un solo lugar."
+  >
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/index.html">
+  <meta property="og:image" content="https://example.com/images/og-image.svg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StockFlow — Control de inventario simple">
+  <meta
+    name="twitter:description"
+    content="StockFlow es la plataforma para controlar tu inventario: gestiona productos, movimientos, alertas de stock bajo y métricas clave desde un solo lugar."
+  >
+  <meta name="twitter:image" content="https://example.com/images/og-image.svg">
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        if (stored === "light" || stored === "dark") {
+          document.documentElement.setAttribute("data-theme", stored);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <a class="skip-link" href="#contenido">
+    Saltar al contenido principal
+  </a>
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <a class="logo" href="index.html" aria-label="StockFlow, inicio">
+        <span class="logo-mark" aria-hidden="true">S</span>
+        StockFlow
+      </a>
+
+      <div class="header-actions">
+
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Cambiar a modo oscuro"
+        >
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="main-nav"
+          aria-label="Abrir menú de navegación"
+        >
+          <svg class="nav-icon nav-icon-menu" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 6h18M3 12h18M3 18h18"></path>
+          </svg>
+          <svg class="nav-icon nav-icon-back" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M19 12H5M11 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+
+        <nav id="main-nav" class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li>
+            <a href="index.html" aria-current="page">Inicio</a>
+          </li>
+          <li>
+            <a href="precios.html">Precios</a>
+          </li>
+          <li>
+            <a href="#contacto">Contacto</a>
+          </li>
+          <li>
+            <a class="header-cta" href="registro.html">
+              Prueba gratis
+            </a>
+          </li>
+        </ul>
+        </nav>
+
+      </div>
+
+    </div>
+  </header>
+
+  <div class="nav-overlay"></div>
+
+  <main id="contenido">
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section id="nosotros" class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+
+        <div class="hero-copy">
+
+          <span class="eyebrow">
+            Control de inventario
+          </span>
+
+          <h1 id="hero-title">
+            Tu inventario bajo control, sin complicaciones.
+          </h1>
+
+          <p>
+            Gestiona productos, movimientos, alertas y métricas
+            desde una sola plataforma.
+          </p>
+
+          <div class="hero-actions">
+
+            <a class="button" href="registro.html">
+              Comenzar gratis
+            </a>
+
+            <a class="button button-secondary" href="#como-funciona">
+              ¿Cómo funciona?
+            </a>
+
+          </div>
+
+          <span class="hero-note">
+            Sin instalaciones. Empieza en minutos.
+          </span>
+
+        </div>
+
+        <div
+          class="dashboard-preview"
+          role="img"
+          aria-label="Vista previa del dashboard de StockFlow"
+        >
+
+          <div class="dashboard-window">
+
+            <div class="window-bar" aria-hidden="true">
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+            </div>
+
+            <div class="dashboard-body">
+
+              <div class="dashboard-title">
+                Resumen del inventario
+              </div>
+
+              <div class="metric-grid">
+
+                <div class="metric">
+                  <span>Productos</span>
+                  <strong>1,284</strong>
+                </div>
+
+                <div class="metric">
+                  <span>Stock bajo</span>
+                  <strong>24</strong>
+                </div>
+
+                <div class="metric">
+                  <span>Entradas</span>
+                  <strong>356</strong>
+                </div>
+
+                <div class="metric">
+                  <span>Salidas</span>
+                  <strong>218</strong>
+                </div>
+
+              </div>
+
+              <div class="stock-chart" aria-hidden="true">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         FUNCIONALIDADES
+    ====================================================== -->
+
+    <section
+      id="funcionalidades"
+      class="section"
+      aria-labelledby="features-title"
+    >
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <span class="eyebrow">
+            Todo en un solo lugar
+          </span>
+
+          <h2 id="features-title">
+            Funcionalidades
+          </h2>
+
+          <p>
+            Las herramientas que necesitas para administrar
+            tu inventario de forma sencilla.
+          </p>
+
+        </header>
+
+        <div class="features-grid">
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">01</div>
+            <h3>Productos</h3>
+            <p>
+              Registra y organiza todo tu catálogo.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">02</div>
+            <h3>Alertas</h3>
+            <p>
+              Detecta productos con niveles de stock bajos.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">03</div>
+            <h3>Reportes</h3>
+            <p>
+              Analiza la información de tu inventario.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">04</div>
+            <h3>Movimientos</h3>
+            <p>
+              Controla entradas, salidas e historial.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">05</div>
+            <h3>Usuarios</h3>
+            <p>
+              Trabaja con tu equipo y administra accesos.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">06</div>
+            <h3>Métricas</h3>
+            <p>
+              Consulta indicadores para tomar decisiones.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         COMO FUNCIONA
+    ====================================================== -->
+
+    <section
+      id="como-funciona"
+      class="section"
+      aria-labelledby="how-title"
+    >
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <span class="eyebrow">
+            Simple y rápido
+          </span>
+
+          <h2 id="how-title">
+            ¿Cómo funciona?
+          </h2>
+
+          <p>
+            Empieza a controlar tu inventario en tres pasos.
+          </p>
+
+        </header>
+
+        <div class="steps">
+
+          <article class="step">
+            <div class="step-number" aria-hidden="true">1</div>
+
+            <h3>
+              Registra tus productos
+            </h3>
+
+            <p>
+              Añade tu catálogo y configura los niveles de inventario.
+            </p>
+          </article>
+
+          <article class="step">
+            <div class="step-number" aria-hidden="true">2</div>
+
+            <h3>
+              Controla los movimientos
+            </h3>
+
+            <p>
+              Registra entradas y salidas para mantener tu stock actualizado.
+            </p>
+          </article>
+
+          <article class="step">
+            <div class="step-number" aria-hidden="true">3</div>
+
+            <h3>
+              Toma mejores decisiones
+            </h3>
+
+            <p>
+              Consulta métricas y alertas para actuar a tiempo.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         RESULTADOS
+    ====================================================== -->
+
+    <section
+      class="section results"
+      aria-labelledby="results-title"
+    >
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <span class="eyebrow">
+            Resultados
+          </span>
+
+          <h2 id="results-title">
+            Más control. Menos trabajo manual.
+          </h2>
+
+          <p>
+            Convierte la información de tu inventario en decisiones.
+          </p>
+
+        </header>
+
+        <div class="results-grid">
+
+          <article class="result">
+            <strong>32%</strong>
+            <span>más eficiencia operativa</span>
+          </article>
+
+          <article class="result">
+            <strong>40%</strong>
+            <span>menos errores de inventario</span>
+          </article>
+
+          <article class="result">
+            <strong>99.9%</strong>
+            <span>disponibilidad de plataforma</span>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         NUESTROS CLIENTES
+         BANNER ROTATIVO SOLO CON CSS
+    ====================================================== -->
+
+    <section
+      class="section clients-section"
+      aria-labelledby="clients-title"
+    >
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <span class="eyebrow">
+            Nuestros clientes
+          </span>
+
+          <h2 id="clients-title">
+            Empresas que confían en StockFlow
+          </h2>
+
+          <p>
+            Una solución diseñada para negocios de diferentes tamaños.
+          </p>
+
+        </header>
+
+        <!--
+          aria-label explica el propósito del carrusel.
+          Los logos se consideran decorativos dentro de este
+          ejemplo porque son nombres de demostración.
+        -->
+        <div
+          class="clients-banner"
+          aria-label="Logos de empresas que utilizan StockFlow"
+        >
+
+          <div class="clients-track">
+
+            <!-- Primer grupo -->
+            <div class="clients-group" aria-hidden="true">
+
+              <div class="client-logo">
+                Nova<span>Market</span>
+              </div>
+
+              <div class="client-logo">
+                Urban<span>Shop</span>
+              </div>
+
+              <div class="client-logo">
+                Logi<span>Max</span>
+              </div>
+
+              <div class="client-logo">
+                Punto<span>Retail</span>
+              </div>
+
+              <div class="client-logo">
+                Alfa<span>Store</span>
+              </div>
+
+              <div class="client-logo">
+                Mega<span>Distribución</span>
+              </div>
+
+            </div>
+
+            <!-- Segundo grupo idéntico para crear el loop -->
+            <div class="clients-group" aria-hidden="true">
+
+              <div class="client-logo">
+                Nova<span>Market</span>
+              </div>
+
+              <div class="client-logo">
+                Urban<span>Shop</span>
+              </div>
+
+              <div class="client-logo">
+                Logi<span>Max</span>
+              </div>
+
+              <div class="client-logo">
+                Punto<span>Retail</span>
+              </div>
+
+              <div class="client-logo">
+                Alfa<span>Store</span>
+              </div>
+
+              <div class="client-logo">
+                Mega<span>Distribución</span>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         PRECIOS
+    ====================================================== -->
+
+    <section
+      id="precios"
+      class="section"
+      aria-labelledby="pricing-title"
+    >
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <span class="eyebrow">
+            Planes flexibles
+          </span>
+
+          <h2 id="pricing-title">
+            Planes de precio
+          </h2>
+
+          <p>
+            Elige el plan que mejor se adapte a tu operación.
+          </p>
+
+        </header>
+
+        <div class="pricing-grid">
+
+          <article class="price-card">
+
+            <h3>Inicial</h3>
+
+            <p>
+              Para pequeños negocios.
+            </p>
+
+            <div class="price">
+              $19
+              <small>/mes</small>
+            </div>
+
+            <ul>
+              <li>Hasta 100 productos</li>
+              <li>1 usuario</li>
+              <li>Control de movimientos</li>
+              <li>Reportes básicos</li>
+            </ul>
+
+            <a class="button button-secondary" href="registro.html">
+              Elegir plan
+            </a>
+
+          </article>
+
+          <article class="price-card featured">
+
+            <span class="popular">
+              Más popular
+            </span>
+
+            <h3>
+              Profesional
+            </h3>
+
+            <p>
+              Para negocios en crecimiento.
+            </p>
+
+            <div class="price">
+              $49
+              <small>/mes</small>
+            </div>
+
+            <ul>
+              <li>Hasta 1,000 productos</li>
+              <li>5 usuarios</li>
+              <li>Alertas automáticas</li>
+              <li>Reportes avanzados</li>
+            </ul>
+
+            <a class="button" href="registro.html">
+              Comenzar ahora
+            </a>
+
+          </article>
+
+          <article class="price-card">
+
+            <h3>
+              Empresa
+            </h3>
+
+            <p>
+              Para operaciones grandes.
+            </p>
+
+            <div class="price">
+              $99
+              <small>/mes</small>
+            </div>
+
+            <ul>
+              <li>Productos ilimitados</li>
+              <li>Usuarios ilimitados</li>
+              <li>Métricas avanzadas</li>
+              <li>Soporte prioritario</li>
+            </ul>
+
+            <a class="button button-secondary" href="#contacto">
+              Contactar
+            </a>
+
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         FAQ
+    ====================================================== -->
+
+    <section
+      class="section"
+      aria-labelledby="faq-title"
+    >
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <span class="eyebrow">
+            Preguntas frecuentes
+          </span>
+
+          <h2 id="faq-title">
+            ¿Tienes alguna duda?
+          </h2>
+
+        </header>
+
+        <div class="faq">
+
+          <details>
+            <summary>
+              ¿Necesito instalar algún programa?
+            </summary>
+
+            <p>
+              No. StockFlow funciona directamente desde el navegador.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              ¿Puedo importar mi inventario?
+            </summary>
+
+            <p>
+              Puedes importar información existente para facilitar
+              la migración de tu inventario.
+            </p>
+          </details>
+
+          <details>
+            <summary>
+              ¿Puedo agregar más usuarios?
+            </summary>
+
+            <p>
+              Sí. Dependiendo del plan puedes trabajar con diferentes
+              cantidades de usuarios.
+            </p>
+          </details>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         CONTACTO
+    ====================================================== -->
+
+    <section
+      id="contacto"
+      class="section"
+      aria-labelledby="contact-title"
+    >
+
+      <div class="container contact-wrapper">
+
+        <div class="contact-copy">
+
+          <span class="eyebrow">
+            Contáctanos
+          </span>
+
+          <h2 id="contact-title">
+            ¿Quieres saber más?
+          </h2>
+
+          <p>
+            Déjanos tus datos y nuestro equipo se pondrá en contacto
+            contigo.
+          </p>
+
+          <ul class="contact-list">
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:hola@stockflow.example">
+                hola@stockflow.example
+              </a>
+            </li>
+
+            <li>
+              <strong>Teléfono:</strong>
+              <a href="tel:+0000000000">
+                +00 000 000 000
+              </a>
+            </li>
+          </ul>
+
+        </div>
+
+        <form
+          class="form-contacto"
+          action="#"
+          method="post"
+          novalidate
+        >
+
+          <div class="form-group">
+
+            <label for="nombre">
+              Nombre
+            </label>
+
+            <input
+              id="nombre"
+              name="nombre"
+              type="text"
+              autocomplete="name"
+              aria-describedby="nombre-error"
+              required
+            >
+
+            <p class="form-error" id="nombre-error" role="alert"></p>
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="email">
+              Correo electrónico
+            </label>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              aria-describedby="email-error"
+              required
+            >
+
+            <p class="form-error" id="email-error" role="alert"></p>
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="mensaje">
+              Mensaje
+            </label>
+
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              aria-describedby="mensaje-error"
+              required
+            ></textarea>
+
+            <p class="form-error" id="mensaje-error" role="alert"></p>
+
+          </div>
+
+          <button
+            class="button"
+            type="submit"
+          >
+            Enviar mensaje
+          </button>
+
+        </form>
+
+        <div class="form-feedback" role="status" aria-live="polite"></div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         CTA FINAL
+    ====================================================== -->
+
+    <section
+      id="registro"
+      class="final-cta"
+      aria-labelledby="cta-title"
+    >
+
+      <div class="container">
+
+        <div class="cta-box">
+
+          <h2 id="cta-title">
+            Empieza a controlar tu inventario hoy.
+          </h2>
+
+          <p>
+            Centraliza tu información, reduce errores y toma
+            mejores decisiones.
+          </p>
+
+          <a class="button" href="#contacto">
+            Comenzar gratis
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       FOOTER
+    ====================================================== -->
+
+  <footer class="site-footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a
+          class="logo"
+          href="index.html"
+          aria-label="StockFlow, inicio"
+        >
+          <span class="logo-mark" aria-hidden="true">S</span>
+          StockFlow
+        </a>
+
+        <p>
+          Control de inventario simple para negocios que quieren crecer.
+        </p>
+
+      </div>
+
+      <nav aria-label="Enlaces del producto">
+
+        <h2 class="footer-heading">
+          Producto
+        </h2>
+
+        <ul class="footer-links">
+          <li>
+            <a href="#funcionalidades">
+              Funcionalidades
+            </a>
+          </li>
+
+          <li>
+            <a href="#como-funciona">
+              Cómo funciona
+            </a>
+          </li>
+
+          <li>
+            <a href="precios.html">
+              Precios
+            </a>
+          </li>
+
+          <li>
+            <a href="#faq-title">
+              Preguntas frecuentes
+            </a>
+          </li>
+        </ul>
+
+      </nav>
+
+      <nav aria-label="Enlaces de la empresa">
+
+        <h2 class="footer-heading">
+          Empresa
+        </h2>
+
+        <ul class="footer-links">
+
+          <li>
+            <a href="#nosotros">
+              Nosotros
+            </a>
+          </li>
+
+          <li>
+            <a href="#contacto">
+              Contacto
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Privacidad
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Términos
+            </a>
+          </li>
+
+        </ul>
+
+      </nav>
+
+    </div>
+
+    <div class="footer-bottom">
+
+      <div class="container">
+
+        <small>
+          © 2026 StockFlow. Todos los derechos reservados.
+        </small>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- Botón preparado para integrar posteriormente un chatbot -->
+  <button
+    class="chatbot"
+    type="button"
+    aria-label="Asistente de ayuda (próximamente)"
+    aria-disabled="true"
+  >
+    ?
+  </button>
+
+  <script src="js/nav.js" defer></script>
+  <script src="js/theme.js" defer></script>
+  <script src="js/contact-form.js" defer></script>
+
+</body>
+</html>
