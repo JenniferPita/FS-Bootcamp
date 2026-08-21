@@ -608,6 +608,47 @@ body.nav-open .main-nav {
     animation: none;
   }
 }
+
+/* =====================================================
+   TESTIMONIOS
+====================================================== */
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.testimonial-card {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.testimonial-card blockquote {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-base);
+}
+
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  font-style: normal;
+}
+
+.testimonial-name {
+  font-weight: var(--font-weight-bold);
+}
+
+.testimonial-role {
+  color: var(--color-muted);
+  font-size: var(--font-size-sm);
+}
+
 /* =====================================================
    PRECIOS
 ====================================================== */
@@ -777,6 +818,123 @@ body.nav-open .main-nav {
   resize: vertical;
 }
 
+/*
+  FEEDBACK NATIVO DE VALIDACIÓN (:valid / :invalid / :focus)
+  :not(:placeholder-shown) evita marcar un campo en rojo/verde
+  antes de que el usuario escriba algo (por eso los inputs de
+  texto/email/password tienen un placeholder, aunque sea " ").
+  Los checkboxes quedan afuera: no tienen :placeholder-shown, así
+  que :invalid se activaría desde que carga la página.
+  El color nunca es la única señal: además del borde, se agrega
+  un ícono (✓/✕) y el fondo cambia con un tinte sutil; el texto
+  del error sigue viviendo en .form-error, como ya hacía el sitio.
+*/
+
+.form-group input:not(.form-checkbox):not(:placeholder-shown):invalid,
+.form-group textarea:not(:placeholder-shown):invalid,
+/*
+  Repetir ".form-group" tres veces es a propósito: la regla nativa
+  :valid de abajo ya suma 4 selectores de clase por sus :not(), así
+  que esto necesita superar ese número (no empatar) para que el JS
+  (que detecta cosas que la validación nativa no puede, como
+  "las contraseñas no coinciden") siempre gane visualmente aunque
+  el campo sea nativamente válido.
+*/
+.form-group.form-group.form-group.is-invalid input:not(.form-checkbox),
+.form-group.form-group.form-group.is-invalid textarea {
+  border-color: var(--color-danger);
+  padding-right: 2.5rem;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='%23c0392b' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"),
+    linear-gradient(
+      color-mix(in srgb, var(--color-danger) 10%, transparent),
+      color-mix(in srgb, var(--color-danger) 10%, transparent)
+    );
+  background-repeat: no-repeat, no-repeat;
+  background-position: right var(--space-3) center, 0 0;
+  background-size: 1.1rem, 100% 100%;
+}
+
+.form-group input:not(.form-checkbox):not(:placeholder-shown):valid,
+.form-group textarea:not(:placeholder-shown):valid {
+  border-color: var(--color-success);
+  padding-right: 2.5rem;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='%23197a45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),
+    linear-gradient(
+      color-mix(in srgb, var(--color-success) 8%, transparent),
+      color-mix(in srgb, var(--color-success) 8%, transparent)
+    );
+  background-repeat: no-repeat, no-repeat;
+  background-position: right var(--space-3) center, 0 0;
+  background-size: 1.1rem, 100% 100%;
+}
+
+/*
+  Borde azul de foco solo en el estado neutro (todavía sin escribir
+  nada, :placeholder-shown). Una vez que el campo tiene contenido y
+  pasa a :valid/:invalid, ese color manda — así el usuario no pierde
+  la señal de error solo por volver a enfocar el campo. El anillo de
+  :focus-visible (ver base.css) sigue marcando el foco en cualquier
+  estado, sin depender del borde.
+*/
+.form-group input:not(.form-checkbox):placeholder-shown:focus,
+.form-group textarea:placeholder-shown:focus {
+  border-color: var(--color-primary);
+}
+
+/*
+  El ícono ✓/✕ es un SVG con el color escrito a mano (los data URI
+  no pueden leer var()), así que en modo oscuro hay que repetir la
+  declaración con los tonos oscuros de --color-danger/--color-success
+  para que siga siendo legible sobre el fondo oscuro del input.
+*/
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .form-group input:not(.form-checkbox):not(:placeholder-shown):invalid,
+  :root:not([data-theme="light"]) .form-group textarea:not(:placeholder-shown):invalid,
+  :root:not([data-theme="light"]) .form-group.form-group.form-group.is-invalid input:not(.form-checkbox),
+  :root:not([data-theme="light"]) .form-group.form-group.form-group.is-invalid textarea {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='%23ff6b6b' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"),
+      linear-gradient(
+        color-mix(in srgb, var(--color-danger) 10%, transparent),
+        color-mix(in srgb, var(--color-danger) 10%, transparent)
+      );
+  }
+
+  :root:not([data-theme="light"]) .form-group input:not(.form-checkbox):not(:placeholder-shown):valid,
+  :root:not([data-theme="light"]) .form-group textarea:not(:placeholder-shown):valid {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='%233ddc84' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),
+      linear-gradient(
+        color-mix(in srgb, var(--color-success) 8%, transparent),
+        color-mix(in srgb, var(--color-success) 8%, transparent)
+      );
+  }
+}
+
+:root[data-theme="dark"] .form-group input:not(.form-checkbox):not(:placeholder-shown):invalid,
+:root[data-theme="dark"] .form-group textarea:not(:placeholder-shown):invalid,
+:root[data-theme="dark"] .form-group.form-group.form-group.is-invalid input:not(.form-checkbox),
+:root[data-theme="dark"] .form-group.form-group.form-group.is-invalid textarea {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='%23ff6b6b' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"),
+    linear-gradient(
+      color-mix(in srgb, var(--color-danger) 10%, transparent),
+      color-mix(in srgb, var(--color-danger) 10%, transparent)
+    );
+}
+
+:root[data-theme="dark"] .form-group input:not(.form-checkbox):not(:placeholder-shown):valid,
+:root[data-theme="dark"] .form-group textarea:not(:placeholder-shown):valid {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='%233ddc84' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),
+    linear-gradient(
+      color-mix(in srgb, var(--color-success) 8%, transparent),
+      color-mix(in srgb, var(--color-success) 8%, transparent)
+    );
+}
+
 .form-group label.checkbox-label {
   display: flex;
   align-items: flex-start;
@@ -805,11 +963,6 @@ body.nav-open .main-nav {
 
 .form-error:empty {
   display: none;
-}
-
-.form-group.is-invalid input,
-.form-group.is-invalid textarea {
-  border-color: var(--color-danger);
 }
 
 /* =====================================================

@@ -11,6 +11,8 @@
 
   <title>StockFlow — Control de inventario simple</title>
 
+  <link rel="canonical" href="https://example.com/index.html">
+
   <meta property="og:title" content="StockFlow — Control de inventario simple">
   <meta
     property="og:description"
@@ -94,10 +96,10 @@
         <nav id="main-nav" class="main-nav" aria-label="Navegación principal">
         <ul>
           <li>
-            <a href="index.html" aria-current="page">Inicio</a>
+            <a href="#contenido" aria-current="page">Inicio</a>
           </li>
           <li>
-            <a href="precios.html">Precios</a>
+            <a href="#precios">Precios</a>
           </li>
           <li>
             <a href="#contacto">Contacto</a>
@@ -532,6 +534,89 @@
     </section>
 
     <!-- =====================================================
+         TESTIMONIOS
+         Contenido de demostración: personas y citas ficticias
+         asociadas a las mismas empresas de ejemplo del banner
+         "Nuestros clientes" de arriba. Reemplazar por testimonios
+         reales antes de cualquier lanzamiento (ver PLAN.md, Fase 3).
+    ====================================================== -->
+
+    <section
+      class="section"
+      aria-labelledby="testimonials-title"
+    >
+
+      <div class="container">
+
+        <header class="section-header">
+
+          <span class="eyebrow">
+            Testimonios
+          </span>
+
+          <h2 id="testimonials-title">
+            Lo que dicen nuestros clientes
+          </h2>
+
+          <p>
+            Negocios que ya usan StockFlow para controlar su día a día.
+          </p>
+
+        </header>
+
+        <div class="testimonials-grid">
+
+          <article class="testimonial-card">
+
+            <blockquote>
+              Antes perdíamos horas revisando el inventario a mano. Con
+              StockFlow vemos el stock bajo apenas pasa y reaccionamos a
+              tiempo.
+            </blockquote>
+
+            <cite class="testimonial-author">
+              <span class="testimonial-name">Camila Reyes</span>
+              <span class="testimonial-role">Dueña, NovaMarket</span>
+            </cite>
+
+          </article>
+
+          <article class="testimonial-card">
+
+            <blockquote>
+              Migramos nuestro catálogo en un día y el equipo lo empezó a
+              usar sin capacitación extra. Los reportes nos ayudan a tomar
+              mejores decisiones cada semana.
+            </blockquote>
+
+            <cite class="testimonial-author">
+              <span class="testimonial-name">Andrés Torres</span>
+              <span class="testimonial-role">Gerente de operaciones, LogiMax</span>
+            </cite>
+
+          </article>
+
+          <article class="testimonial-card">
+
+            <blockquote>
+              Lo que más valoro es la simplicidad: sin instalaciones, sin
+              curva de aprendizaje. En un mes ya teníamos todo el
+              inventario controlado.
+            </blockquote>
+
+            <cite class="testimonial-author">
+              <span class="testimonial-name">Valentina Ponce</span>
+              <span class="testimonial-role">Encargada de inventario, AlfaStore</span>
+            </cite>
+
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
          PRECIOS
     ====================================================== -->
 
@@ -777,6 +862,7 @@
               name="nombre"
               type="text"
               autocomplete="name"
+              placeholder="Ej. María Torres"
               aria-describedby="nombre-error"
               required
             >
@@ -796,6 +882,7 @@
               name="email"
               type="email"
               autocomplete="email"
+              placeholder="tu@correo.com"
               aria-describedby="email-error"
               required
             >
@@ -813,6 +900,7 @@
             <textarea
               id="mensaje"
               name="mensaje"
+              placeholder="Cuéntanos en qué podemos ayudarte"
               aria-describedby="mensaje-error"
               required
             ></textarea>

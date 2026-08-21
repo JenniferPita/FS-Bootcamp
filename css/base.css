@@ -28,6 +28,22 @@ body {
   color: var(--color-text);
   font-family: var(--font-family-base);
   line-height: var(--line-height-base);
+  /*
+    El drawer de navegación móvil (.main-nav) se esconde con
+    position: fixed + transform: translateX(100%) cuando está
+    cerrado. Sin este overflow-x, ese offset cuenta para el ancho
+    scrolleable del documento y produce scroll horizontal falso
+    por debajo de 901px (donde el drawer sigue siendo fixed).
+
+    Va en <body>, no en <html>: si el overflow-x queda en <html>,
+    el navegador le da a <html> su propio overflow-y:auto (efecto
+    secundario del spec) y ese scroll paralelo ignora por completo
+    el body.nav-open{overflow:hidden} de más abajo, que es lo que
+    debería bloquear el scroll de fondo mientras el menú móvil está
+    abierto. Con ambos en <body>, es el mismo elemento el que
+    scrollea y el que se bloquea, sin atajos.
+  */
+  overflow-x: hidden;
 }
 
 a {
@@ -64,4 +80,22 @@ textarea {
 
 .skip-link:focus {
   transform: translateY(0);
+}
+
+/*
+  Oculta visualmente un elemento sin quitarlo del árbol de
+  accesibilidad (a diferencia de display:none/visibility:hidden).
+  Útil para encabezados que arreglan la jerarquía semántica sin
+  agregar texto visible nuevo.
+*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
