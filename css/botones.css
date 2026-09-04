@@ -1,0 +1,80 @@
+.c-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+    padding: 8px 16px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    appearance: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+.c-btn:active {
+    transform: scale(0.97);
+}
+.c-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none;
+}
+.c-btn--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+.c-btn--primary:hover {
+    background-color: var(--color-primary-dark);
+}
+.c-btn--primary:active {
+    background-color: color-mix(in srgb, var(--color-primary-dark) 85%, black);
+}
+.c-btn--secondary {
+    border-color: var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+}
+.c-btn--secondary:hover {
+    background-color: var(--color-surface-hover);
+}
+.c-btn--secondary:active {
+    background-color: color-mix(in srgb, var(--color-surface-hover) 85%, black);
+    border-color: var(--color-muted);
+}
+.c-btn--destructive {
+    background-color: var(--color-danger);
+    color: #fff;
+}
+.c-btn--destructive:hover {
+    background-color: color-mix(in srgb, var(--color-danger) 85%, black);
+}
+.c-btn--destructive:active {
+    background-color: color-mix(in srgb, var(--color-danger) 70%, black);
+}
+.c-btn--icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: transparent;
+    color: var(--color-text);
+}
+.c-btn--icon:hover {
+    background-color: var(--color-surface-hover);
+}
+.c-btn--icon:active {
+    background-color: color-mix(in srgb, var(--color-surface-hover) 85%, black);
+}
+
+@media (max-width: 480px) {
+}
+
+@media (max-width: 768px) {
+}

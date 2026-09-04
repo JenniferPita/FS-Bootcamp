@@ -2,7 +2,10 @@
   Este archivo es el punto de entrada del CSS del sitio.
   El contenido está modularizado en variables.css, base.css,
   layout.css, components.css y responsive.css (todos en
-  esta misma carpeta).
+  esta misma carpeta), más los 6 archivos de componentes del
+  playground del backoffice (alerts.css, botones.css,
+  checkboxes-radios.css, dialogs.css, menus.css, toasts.css),
+  usados por playground.html.
 
   El ORDEN de los @import importa: responsive.css debe ir
   siempre último (ver el comentario dentro de ese archivo).
@@ -13,4 +16,10 @@
 @import "base.css";
 @import "layout.css";
 @import "components.css";
+@import "alerts.css";
+@import "botones.css";
+@import "checkboxes-radios.css";
+@import "dialogs.css";
+@import "menus.css";
+@import "toasts.css";
 @import "responsive.css";

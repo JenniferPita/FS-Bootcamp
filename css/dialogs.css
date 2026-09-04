@@ -1,0 +1,63 @@
+.c-dialog {
+    box-sizing: border-box;
+    width: calc(100% - 2rem);
+    max-width: 26rem;
+    margin: auto;
+    padding: var(--space-6);
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: var(--shadow-md);
+}
+.c-dialog::backdrop {
+    background: color-mix(in srgb, var(--color-ink) 55%, transparent);
+}
+.c-dialog p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-base);
+}
+.c-dialog-title {
+    margin: 0 0 var(--space-3);
+    color: var(--color-text);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+}
+.c-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .c-dialog {
+        transition: opacity 0.2s ease, transform 0.2s ease, overlay 0.2s ease allow-discrete, display 0.2s ease allow-discrete;
+        opacity: 1;
+        transform: scale(1);
+    }
+    .c-dialog:not([open]) {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    .c-dialog::backdrop {
+        transition: background-color 0.2s ease, overlay 0.2s ease allow-discrete, display 0.2s ease allow-discrete;
+    }
+    @starting-style {
+        .c-dialog[open] {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        .c-dialog[open]::backdrop {
+            background: transparent;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+}
+
+@media (max-width: 768px) {
+}

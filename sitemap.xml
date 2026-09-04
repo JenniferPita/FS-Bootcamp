@@ -4,9 +4,24 @@
     <loc>https://example.com/index.html</loc>
   </url>
   <url>
+    <loc>https://example.com/nosotros.html</loc>
+  </url>
+  <url>
     <loc>https://example.com/precios.html</loc>
   </url>
   <url>
     <loc>https://example.com/registro.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/login.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/recuperar-password.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/terminos.html</loc>
+  </url>
+  <url>
+    <loc>https://example.com/privacidad.html</loc>
   </url>
 </urlset>

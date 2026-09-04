@@ -99,6 +99,9 @@
             <a href="#contenido" aria-current="page">Inicio</a>
           </li>
           <li>
+            <a href="nosotros.html">Nosotros</a>
+          </li>
+          <li>
             <a href="#precios">Precios</a>
           </li>
           <li>
@@ -128,7 +131,7 @@
          HERO
     ====================================================== -->
 
-    <section id="nosotros" class="hero" aria-labelledby="hero-title">
+    <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
 
         <div class="hero-copy">
@@ -137,8 +140,11 @@
             Control de inventario
           </span>
 
-          <h1 id="hero-title">
-            Tu inventario bajo control, sin complicaciones.
+          <h1 id="hero-title" aria-label="Tu inventario bajo control, sin complicaciones.">
+            <span class="hero-title-wrap">
+              <span class="hero-title-ghost" aria-hidden="true">Tu inventario bajo control, sin complicaciones.</span>
+              <span class="hero-title-text" aria-hidden="true">Tu inventario bajo control, sin complicaciones.</span>
+            </span>
           </h1>
 
           <p>
@@ -150,10 +156,6 @@
 
             <a class="button" href="registro.html">
               Comenzar gratis
-            </a>
-
-            <a class="button button-secondary" href="#como-funciona">
-              ¿Cómo funciona?
             </a>
 
           </div>
@@ -180,32 +182,41 @@
 
             <div class="dashboard-body">
 
-              <div class="dashboard-title">
-                Resumen del inventario
+              <div class="dashboard-title-row">
+                <div class="dashboard-title">
+                  Resumen del inventario
+                </div>
+                <span class="dashboard-period">
+                  Últimos 30 días
+                </span>
               </div>
 
               <div class="metric-grid">
 
                 <div class="metric">
-                  <span>Productos</span>
+                  <span>Productos activos</span>
                   <strong>1,284</strong>
                 </div>
 
-                <div class="metric">
-                  <span>Stock bajo</span>
+                <div class="metric metric-warning">
+                  <span>Productos con stock bajo</span>
                   <strong>24</strong>
                 </div>
 
                 <div class="metric">
-                  <span>Entradas</span>
+                  <span>Entradas del mes</span>
                   <strong>356</strong>
                 </div>
 
                 <div class="metric">
-                  <span>Salidas</span>
+                  <span>Salidas del mes</span>
                   <strong>218</strong>
                 </div>
 
+              </div>
+
+              <div class="stock-chart-caption">
+                Movimientos de inventario por semana
               </div>
 
               <div class="stock-chart" aria-hidden="true">
@@ -220,91 +231,21 @@
 
             </div>
           </div>
-        </div>
+          </div>
 
-      </div>
-    </section>
+          <div class="floating-badge floating-badge-check" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
 
-    <!-- =====================================================
-         FUNCIONALIDADES
-    ====================================================== -->
 
-    <section
-      id="funcionalidades"
-      class="section"
-      aria-labelledby="features-title"
-    >
 
-      <div class="container">
-
-        <header class="section-header">
-
-          <span class="eyebrow">
-            Todo en un solo lugar
-          </span>
-
-          <h2 id="features-title">
-            Funcionalidades
-          </h2>
-
-          <p>
-            Las herramientas que necesitas para administrar
-            tu inventario de forma sencilla.
-          </p>
-
-        </header>
-
-        <div class="features-grid">
-
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">01</div>
-            <h3>Productos</h3>
-            <p>
-              Registra y organiza todo tu catálogo.
-            </p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">02</div>
-            <h3>Alertas</h3>
-            <p>
-              Detecta productos con niveles de stock bajos.
-            </p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">03</div>
-            <h3>Reportes</h3>
-            <p>
-              Analiza la información de tu inventario.
-            </p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">04</div>
-            <h3>Movimientos</h3>
-            <p>
-              Controla entradas, salidas e historial.
-            </p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">05</div>
-            <h3>Usuarios</h3>
-            <p>
-              Trabaja con tu equipo y administra accesos.
-            </p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">06</div>
-            <h3>Métricas</h3>
-            <p>
-              Consulta indicadores para tomar decisiones.
-            </p>
-          </article>
-
-        </div>
+          <div class="floating-badge floating-badge-spark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/>
+            </svg>
+          </div>
 
       </div>
     </section>
@@ -339,39 +280,65 @@
 
         <div class="steps">
 
-          <article class="step">
-            <div class="step-number" aria-hidden="true">1</div>
+          <article class="step" data-reveal>
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 8l-9-5-9 5 9 5 9-5z"/>
+                <path d="M3 8v8l9 5 9-5V8"/>
+                <path d="M12 13v8"/>
+              </svg>
+              <span class="step-number">1</span>
+            </div>
 
             <h3>
               Registra tus productos
             </h3>
 
             <p>
-              Añade tu catálogo y configura los niveles de inventario.
+              Añade tu catálogo, define categorías y configura el
+              nivel mínimo de stock de cada producto. Todo desde el
+              navegador, sin instalar nada.
             </p>
           </article>
 
-          <article class="step">
-            <div class="step-number" aria-hidden="true">2</div>
+          <article class="step" data-reveal="1">
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 3l4 4-4 4"/>
+                <path d="M3 7h8"/>
+                <path d="M17 21l-4-4 4-4"/>
+                <path d="M21 17h-8"/>
+              </svg>
+              <span class="step-number">2</span>
+            </div>
 
             <h3>
               Controla los movimientos
             </h3>
 
             <p>
-              Registra entradas y salidas para mantener tu stock actualizado.
+              Registra entradas y salidas a medida que pasan, para
+              que tu stock esté siempre al día. Cada movimiento queda
+              guardado en el historial.
             </p>
           </article>
 
-          <article class="step">
-            <div class="step-number" aria-hidden="true">3</div>
+          <article class="step" data-reveal="2">
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 6l-9.5 9.5-5-5L1 18"/>
+                <path d="M17 6h6v6"/>
+              </svg>
+              <span class="step-number">3</span>
+            </div>
 
             <h3>
               Toma mejores decisiones
             </h3>
 
             <p>
-              Consulta métricas y alertas para actuar a tiempo.
+              Consulta métricas, reportes y alertas de stock bajo
+              para saber qué reponer y cuándo, sin improvisar.
             </p>
           </article>
 
@@ -394,7 +361,7 @@
         <header class="section-header">
 
           <span class="eyebrow">
-            Resultados
+            Nuestro objetivo
           </span>
 
           <h2 id="results-title">
@@ -402,7 +369,7 @@
           </h2>
 
           <p>
-            Convierte la información de tu inventario en decisiones.
+            A esto apuntamos con cada funcionalidad de StockFlow.
           </p>
 
         </header>
@@ -410,21 +377,26 @@
         <div class="results-grid">
 
           <article class="result">
-            <strong>32%</strong>
+            <strong>Hasta 32%</strong>
             <span>más eficiencia operativa</span>
           </article>
 
           <article class="result">
-            <strong>40%</strong>
+            <strong>Hasta 40%</strong>
             <span>menos errores de inventario</span>
           </article>
 
           <article class="result">
             <strong>99.9%</strong>
-            <span>disponibilidad de plataforma</span>
+            <span>de disponibilidad, nuestro compromiso</span>
           </article>
 
         </div>
+
+        <p class="results-note">
+          Cifras objetivo, no datos de clientes actuales — todavía
+          estamos construyendo nuestra base de casos reales.
+        </p>
 
       </div>
     </section>
@@ -458,18 +430,23 @@
         </header>
 
         <!--
-          aria-label explica el propósito del carrusel.
-          Los logos se consideran decorativos dentro de este
-          ejemplo porque son nombres de demostración.
+          Los logos son decorativos (aria-label ya explica el
+          propósito del carrusel en .clients-banner), pero el
+          carrusel completo se puede arrastrar con el mouse o el
+          dedo (ts/clients-carousel.ts): al soltar, o al alejar el
+          cursor/foco, retoma el auto-scroll desde donde quedó, sin
+          saltos. Dos pistas idénticas permiten que tanto el
+          auto-scroll como el arrastre puedan dar la vuelta sin
+          quedarse sin contenido.
         -->
         <div
           class="clients-banner"
-          aria-label="Logos de empresas que utilizan StockFlow"
+          tabindex="0"
+          aria-label="Empresas que utilizan StockFlow. Arrastra con el mouse o el dedo, o usa las flechas izquierda y derecha, para recorrerlas."
         >
 
           <div class="clients-track">
 
-            <!-- Primer grupo -->
             <div class="clients-group" aria-hidden="true">
 
               <div class="client-logo">
@@ -498,7 +475,6 @@
 
             </div>
 
-            <!-- Segundo grupo idéntico para crear el loop -->
             <div class="clients-group" aria-hidden="true">
 
               <div class="client-logo">
@@ -542,74 +518,172 @@
     ====================================================== -->
 
     <section
-      class="section"
+      class="section testimonials-section"
       aria-labelledby="testimonials-title"
     >
 
-      <div class="container">
+      <div class="container testimonials-layout">
 
-        <header class="section-header">
+        <div class="testimonials-intro">
 
-          <span class="eyebrow">
-            Testimonios
-          </span>
+          <header class="section-header">
 
-          <h2 id="testimonials-title">
-            Lo que dicen nuestros clientes
-          </h2>
+            <span class="eyebrow">
+              Testimonios
+            </span>
 
-          <p>
-            Negocios que ya usan StockFlow para controlar su día a día.
-          </p>
+            <h2 id="testimonials-title">
+              Lo que dicen nuestros clientes
+            </h2>
 
-        </header>
+            <p>
+              Negocios que ya usan StockFlow para controlar su día a día.
+            </p>
 
-        <div class="testimonials-grid">
+          </header>
 
-          <article class="testimonial-card">
+          <a class="button" href="registro.html">
+            Comenzar gratis
+          </a>
 
-            <blockquote>
-              Antes perdíamos horas revisando el inventario a mano. Con
-              StockFlow vemos el stock bajo apenas pasa y reaccionamos a
-              tiempo.
-            </blockquote>
+        </div>
 
-            <cite class="testimonial-author">
-              <span class="testimonial-name">Camila Reyes</span>
-              <span class="testimonial-role">Dueña, NovaMarket</span>
-            </cite>
+        <div
+          class="testimonial-carousel"
+          role="region"
+          aria-roledescription="carrusel"
+          aria-label="Testimonios de clientes"
+        >
 
-          </article>
+          <div class="testimonial-viewport">
+            <div class="testimonial-track">
 
-          <article class="testimonial-card">
+              <article class="testimonial-slide" data-testimonial-index="0">
 
-            <blockquote>
-              Migramos nuestro catálogo en un día y el equipo lo empezó a
-              usar sin capacitación extra. Los reportes nos ayudan a tomar
-              mejores decisiones cada semana.
-            </blockquote>
+                <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
 
-            <cite class="testimonial-author">
-              <span class="testimonial-name">Andrés Torres</span>
-              <span class="testimonial-role">Gerente de operaciones, LogiMax</span>
-            </cite>
+                <blockquote>
+                  Antes perdíamos horas revisando el inventario a mano. Con
+                  StockFlow vemos el stock bajo apenas pasa y reaccionamos a
+                  tiempo.
+                </blockquote>
 
-          </article>
+                <cite class="testimonial-author">
+                  <span class="testimonial-avatar" aria-hidden="true">CR</span>
+                  <span class="testimonial-author-info">
+                    <span class="testimonial-name">Camila Reyes</span>
+                    <span class="testimonial-role">Dueña, NovaMarket</span>
+                  </span>
+                </cite>
 
-          <article class="testimonial-card">
+              </article>
 
-            <blockquote>
-              Lo que más valoro es la simplicidad: sin instalaciones, sin
-              curva de aprendizaje. En un mes ya teníamos todo el
-              inventario controlado.
-            </blockquote>
+              <article class="testimonial-slide" data-testimonial-index="1">
 
-            <cite class="testimonial-author">
-              <span class="testimonial-name">Valentina Ponce</span>
-              <span class="testimonial-role">Encargada de inventario, AlfaStore</span>
-            </cite>
+                <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
 
-          </article>
+                <blockquote>
+                  Migramos nuestro catálogo en un día y el equipo lo empezó a
+                  usar sin capacitación extra. Los reportes nos ayudan a tomar
+                  mejores decisiones cada semana.
+                </blockquote>
+
+                <cite class="testimonial-author">
+                  <span class="testimonial-avatar" aria-hidden="true">AT</span>
+                  <span class="testimonial-author-info">
+                    <span class="testimonial-name">Andrés Torres</span>
+                    <span class="testimonial-role">Gerente de operaciones, LogiMax</span>
+                  </span>
+                </cite>
+
+              </article>
+
+              <article class="testimonial-slide" data-testimonial-index="2">
+
+                <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+
+                <blockquote>
+                  Lo que más valoro es la simplicidad: sin instalaciones, sin
+                  curva de aprendizaje. En un mes ya teníamos todo el
+                  inventario controlado.
+                </blockquote>
+
+                <cite class="testimonial-author">
+                  <span class="testimonial-avatar" aria-hidden="true">VP</span>
+                  <span class="testimonial-author-info">
+                    <span class="testimonial-name">Valentina Ponce</span>
+                    <span class="testimonial-role">Encargada de inventario, AlfaStore</span>
+                  </span>
+                </cite>
+
+              </article>
+
+              <article class="testimonial-slide" data-testimonial-index="3">
+
+                <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+
+                <blockquote>
+                  Las alertas de stock bajo nos salvaron más de una vez:
+                  antes se nos agotaban productos sin darnos cuenta, ahora
+                  reponemos a tiempo.
+                </blockquote>
+
+                <cite class="testimonial-author">
+                  <span class="testimonial-avatar" aria-hidden="true">DS</span>
+                  <span class="testimonial-author-info">
+                    <span class="testimonial-name">Diego Salazar</span>
+                    <span class="testimonial-role">Encargado de compras, UrbanShop</span>
+                  </span>
+                </cite>
+
+              </article>
+
+              <article class="testimonial-slide" data-testimonial-index="4">
+
+                <span class="testimonial-quote-mark" aria-hidden="true">&ldquo;</span>
+
+                <blockquote>
+                  Los reportes nos muestran qué se mueve y qué no. Dejamos
+                  de comprar por intuición y empezamos a decidir con datos
+                  reales.
+                </blockquote>
+
+                <cite class="testimonial-author">
+                  <span class="testimonial-avatar" aria-hidden="true">SH</span>
+                  <span class="testimonial-author-info">
+                    <span class="testimonial-name">Sofía Herrera</span>
+                    <span class="testimonial-role">Gerenta general, PuntoRetail</span>
+                  </span>
+                </cite>
+
+              </article>
+
+            </div>
+          </div>
+
+          <div class="testimonial-nav">
+
+            <button
+              type="button"
+              class="testimonial-nav-btn testimonial-nav-prev"
+              aria-label="Testimonio anterior"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 15l-6-6-6 6"/>
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              class="testimonial-nav-btn testimonial-nav-next"
+              aria-label="Testimonio siguiente"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+
+          </div>
 
         </div>
 
@@ -726,8 +800,11 @@
               <li>Soporte prioritario</li>
             </ul>
 
-            <a class="button button-secondary" href="#contacto">
-              Contactar
+            <a
+              class="button button-secondary"
+              href="mailto:hola@stockflow.example?subject=Consulta%20plan%20Empresa"
+            >
+              Hablar con ventas
             </a>
 
           </article>
@@ -946,7 +1023,7 @@
             mejores decisiones.
           </p>
 
-          <a class="button" href="#contacto">
+          <a class="button" href="registro.html">
             Comenzar gratis
           </a>
 
@@ -990,7 +1067,7 @@
 
         <ul class="footer-links">
           <li>
-            <a href="#funcionalidades">
+            <a href="nosotros.html#funcionalidades">
               Funcionalidades
             </a>
           </li>
@@ -1025,7 +1102,7 @@
         <ul class="footer-links">
 
           <li>
-            <a href="#nosotros">
+            <a href="nosotros.html">
               Nosotros
             </a>
           </li>
@@ -1037,13 +1114,13 @@
           </li>
 
           <li>
-            <a href="#">
+            <a href="privacidad.html">
               Privacidad
             </a>
           </li>
 
           <li>
-            <a href="#">
+            <a href="terminos.html">
               Términos
             </a>
           </li>
@@ -1068,18 +1145,160 @@
 
   </footer>
 
-  <!-- Botón preparado para integrar posteriormente un chatbot -->
+  <!-- =====================================================
+       ASISTENTE DE AYUDA
+       Respuestas predefinidas reutilizando las FAQ del sitio,
+       sin backend ni IA real.
+  ====================================================== -->
+
   <button
     class="chatbot"
     type="button"
-    aria-label="Asistente de ayuda (próximamente)"
-    aria-disabled="true"
+    id="chatbot-toggle"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    aria-controls="chatbot-panel"
+    aria-label="Abrir asistente de ayuda"
   >
     ?
   </button>
 
+  <div id="chatbot-panel" class="chatbot-panel" hidden>
+
+    <div class="chatbot-panel-header">
+      <span>Asistente de ayuda</span>
+      <button
+        type="button"
+        class="chatbot-panel-close"
+        aria-label="Cerrar asistente de ayuda"
+      >
+        ✕
+      </button>
+    </div>
+
+    <div class="chatbot-panel-body">
+
+      <p class="chatbot-message chatbot-message-bot">
+        ¡Hola! ¿En qué puedo ayudarte?
+      </p>
+
+      <div
+        class="chatbot-transcript"
+        id="chatbot-transcript"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+    </div>
+
+    <div class="chatbot-quick-help">
+
+      <button
+        type="button"
+        class="chatbot-faq-toggle"
+        id="chatbot-faq-toggle"
+        aria-expanded="false"
+        aria-controls="chatbot-questions"
+      >
+        Preguntas frecuentes
+      </button>
+
+      <div id="chatbot-questions" class="chatbot-questions-bubble">
+
+        <div class="chatbot-questions-bubble-header">
+          <span>Preguntas frecuentes</span>
+          <button
+            type="button"
+            class="chatbot-questions-bubble-close"
+            aria-label="Cerrar preguntas frecuentes"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="chatbot-questions-list">
+
+        <button
+          type="button"
+          class="chatbot-question"
+          data-answer="No. StockFlow funciona directamente desde el navegador, sin instalaciones."
+        >
+          ¿Necesito instalar algún programa?
+        </button>
+
+        <button
+          type="button"
+          class="chatbot-question"
+          data-answer="Sí. Todos los planes incluyen 14 días de prueba gratuita, sin necesidad de tarjeta de crédito."
+        >
+          ¿Ofrecen prueba gratuita?
+        </button>
+
+        <button
+          type="button"
+          class="chatbot-question"
+          data-answer="Sí. Puedes importar tu catálogo actual para facilitar la migración."
+        >
+          ¿Puedo importar mi inventario existente?
+        </button>
+
+        <button
+          type="button"
+          class="chatbot-question"
+          data-answer="Sí. Puedes subir o bajar de plan cuando quieras desde tu panel de cuenta, sin penalidades."
+        >
+          ¿Puedo cambiar de plan más adelante?
+        </button>
+
+        <button
+          type="button"
+          class="chatbot-question"
+          data-answer="Sí. Dependiendo del plan puedes trabajar con diferentes cantidades de usuarios."
+        >
+          ¿Puedo agregar más usuarios?
+        </button>
+
+        <button
+          type="button"
+          class="chatbot-question"
+          data-answer="Aceptamos las principales tarjetas de crédito y débito."
+        >
+          ¿Qué métodos de pago aceptan?
+        </button>
+
+        <button
+          type="button"
+          class="chatbot-question"
+          data-answer="Sí. No hay contratos de permanencia; puedes cancelar tu suscripción cuando lo necesites."
+        >
+          ¿Puedo cancelar cuando quiera?
+        </button>
+
+        <button
+          type="button"
+          class="chatbot-question"
+          data-answer="Escríbenos y te respondemos directo."
+          data-link-href="index.html#contacto"
+          data-link-text="Ir a contacto"
+        >
+          ¿No encontraste tu respuesta?
+        </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
   <script src="js/nav.js" defer></script>
   <script src="js/theme.js" defer></script>
+  <script src="js/chatbot.js" defer></script>
+  <script src="js/hero-typewriter.js" defer></script>
+  <script src="js/clients-carousel.js" defer></script>
+  <script src="js/scroll-reveal.js" defer></script>
+  <script src="js/testimonials-carousel.js" defer></script>
   <script src="js/contact-form.js" defer></script>
 
 </body>

@@ -40,12 +40,17 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .results-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .feature-detail {
+    flex-direction: row;
+    align-items: flex-start;
   }
 
-  .metric-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .feature-detail .feature-icon {
+    flex-shrink: 0;
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .footer-grid {
@@ -70,6 +75,17 @@
   .chatbot {
     right: 1rem;
     bottom: 1rem;
+  }
+
+  .chatbot-panel {
+    right: 1rem;
+    bottom: 4.75rem;
+  }
+
+  .chatbot-questions-bubble {
+    right: calc(100% + var(--space-3));
+    bottom: 0;
+    width: min(70vw, 260px);
   }
 }
 
@@ -142,8 +158,49 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .testimonials-grid {
-    grid-template-columns: repeat(3, 1fr);
+  /*
+    En fila (3 columnas) el conector pasa de vertical a horizontal:
+    apaga el ::before de mobile y prende un ::after en el gap
+    horizontal entre columnas, a la altura de la insignia.
+  */
+  .steps .step:not(:first-child)::before {
+    content: none;
+  }
+
+  .steps .step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--space-7) + 1.375rem);
+    right: calc(-1 * var(--space-4));
+    width: var(--space-4);
+    height: 2px;
+    background: var(--color-border);
+  }
+
+  .testimonials-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonial-carousel {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  /*
+    flex:1 + min-width:0 solo hace falta en fila (acá): su único hijo
+    (.testimonial-track) es position:absolute y no aporta ancho
+    intrínseco, así que sin flex:1 este item colapsa a 0px de ancho.
+    En columna (mobile, ver base) el eje principal es la altura, y ahí
+    flex:1 pisaría el height:26rem explícito -flex-basis:0% de flex:1
+    gana sobre height- así que solo se aplica en este breakpoint.
+  */
+  .testimonial-viewport {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .testimonial-nav {
+    flex-direction: column;
   }
 
   .footer-grid {

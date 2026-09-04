@@ -50,9 +50,21 @@ Ambas páginas llevan un comentario HTML visible marcándolas como contenido de 
 
 ## Fase 4 — Consistencia de contenido
 
-- **Eliminar la duplicación literal de precios y resultados** entre `index.html` y `precios.html`: la home pasa a mostrar una versión resumida de precios (los 3 montos + un botón "Ver todos los planes y funcionalidades" hacia `precios.html`) en vez de repetir las 3 tarjetas completas; la sección "Resultados" completa vive solo en `index.html`, y `precios.html` la reemplaza por una franja de una sola línea o la retira.
+- ~~**Eliminar la duplicación literal de precios**~~ — implementado y luego **revertido a pedido del usuario**: `index.html` vuelve a mostrar las 3 tarjetas completas de precios (idénticas a `precios.html`, incluido el CTA de Empresa de más abajo), en vez del resumen condensado. La duplicación entre ambas páginas queda como decisión de producto aceptada, no como pendiente.
+- **Resultados**: la sección completa vive solo en `index.html`; `precios.html` la retiró (esta parte del punto no se revirtió).
 - **Tabla comparativa de funcionalidades** en `precios.html`, debajo de las tarjetas, con filas de funcionalidades y columnas Inicial/Profesional/Empresa (check/cruz) — usa los mismos datos que ya están en las listas de cada tarjeta, solo en formato más escaneable.
 - **CTA del plan Empresa** — cambiar "Contactar" para que quede claro que es una consulta de ventas (ej. `mailto:` con asunto prellenado "Consulta plan Empresa", o texto de botón "Hablar con ventas").
+
+## Fase 5 — Funcionalidades y Nosotros, unificadas en `nosotros.html`
+
+`index.html` se estaba volviendo largo, y dos de sus secciones tenían más para contar de lo que entraba en una card resumida: **Funcionalidades** (6 cards con una sola línea cada una) y **Nosotros** (3 cards de filosofía). Primero se probó el mismo patrón que usa `precios.html` (página aparte + resumen condensado en el home) con dos páginas separadas, `funcionalidades.html` y `nosotros.html` — a pedido del usuario, se simplificó: **`index.html` ya no tiene secciones "Nosotros" ni "Funcionalidades"** (se quitaron por completo, sin resumen ni teaser), y ambos temas viven juntos en una sola página, **`nosotros.html`**:
+
+- Sección "Por qué existe StockFlow" (las 3 cards de filosofía con su copy completa, sin cambios de contenido) — sigue siendo el `<h1>` de la página.
+- Sección "Funcionalidades" (`id="funcionalidades"`, `<h2>`), debajo de la anterior en la misma página — cada una de las 6 funcionalidades con un párrafo y una lista de capacidades concretas.
+
+Nav y footer de **todas** las páginas apuntan a `nosotros.html` (un solo ítem de nav, "Nosotros"); el footer conserva un enlace "Funcionalidades" en la columna Producto que apunta a `nosotros.html#funcionalidades` para no perder ese punto de entrada.
+
+**Fuera de esta fase, deliberadamente:** Cómo funciona, Resultados, Clientes/Testimonios, Precios, FAQ y el CTA final se quedan como secciones del home — son contenido de conversión/embudo, o (Clientes/Testimonios) todavía contenido de relleno pendiente de reemplazo por prueba social real (ver Fase 3).
 
 ## Verificación
 

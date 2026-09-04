@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playground de componentes — Backoffice</title>
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .skip-link:focus {
+      left: 0.5rem;
+      top: 0.5rem;
+    }
+
+    .playground-nav {
+      flex: 0 0 220px;
+      border-right: 1px solid #ccc;
+      padding: 1.5rem 1rem;
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+
+    .playground-nav h2 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 0.75rem;
+    }
+
+    .playground-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .playground-main {
+      flex: 1 1 auto;
+      padding: 1.5rem 2rem 4rem;
+      min-width: 0;
+    }
+
+    .playground-main > header {
+      margin-bottom: 2rem;
+    }
+
+    .playground-section {
+      padding-top: 1.5rem;
+      margin-bottom: 3rem;
+      border-top: 1px solid #ccc;
+    }
+
+    .playground-section:first-of-type {
+      border-top: none;
+    }
+
+    .playground-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .playground-demo {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .c-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .c-btn-row-label {
+      flex: 0 0 100%;
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--color-muted, #626262);
+    }
+
+    .playground-behavior dl {
+      margin: 0;
+    }
+
+    .playground-behavior dt {
+      font-weight: 600;
+      margin-top: 0.75rem;
+    }
+
+    .playground-behavior dt:first-child {
+      margin-top: 0;
+    }
+
+    .playground-behavior dd {
+      margin: 0.15rem 0 0;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .playground-nav {
+        position: static;
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .playground-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#playground-contenido">Saltar al contenido principal</a>
+
+  <aside class="playground-nav">
+    <nav aria-label="Componentes del playground">
+      <h2>Componentes</h2>
+      <ul>
+        <li><a href="#seccion-alerts">Alerts</a></li>
+        <li><a href="#seccion-botones">Botones</a></li>
+        <li><a href="#seccion-checkboxes-radios">Checkboxes/Radios</a></li>
+        <li><a href="#seccion-dialogs">Dialogs</a></li>
+        <li><a href="#seccion-menus">Menús</a></li>
+        <li><a href="#seccion-toasts">Toasts</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="playground-main" id="playground-contenido">
+    <header>
+      <h1>Playground de componentes</h1>
+      <p>HTML real de los componentes de interacción del backoffice, junto con su comportamiento de teclado y foco.</p>
+    </header>
+
+    <!-- =====================================================
+         1. ALERTS
+    ====================================================== -->
+    <section class="playground-section" id="seccion-alerts" aria-labelledby="alerts-heading">
+      <h2 id="alerts-heading">Alerts</h2>
+      <div class="playground-columns">
+
+        <div class="playground-demo">
+          <div class="c-alert c-alert--success" role="status">
+            <span class="c-alert-icon" aria-hidden="true">✓</span>
+            <p class="c-alert-message">Los cambios se guardaron correctamente.</p>
+            <button type="button" class="c-alert-close" aria-label="Cerrar alerta de éxito">×</button>
+          </div>
+
+          <div class="c-alert c-alert--error" role="alert">
+            <span class="c-alert-icon" aria-hidden="true">⛔</span>
+            <p class="c-alert-message">No se pudo eliminar el recurso. Intenta de nuevo.</p>
+            <button type="button" class="c-alert-close" aria-label="Cerrar alerta de error">×</button>
+          </div>
+
+          <div class="c-alert c-alert--warning" role="alert">
+            <span class="c-alert-icon" aria-hidden="true">⚠</span>
+            <p class="c-alert-message">Tu sesión expirará en 5 minutos.</p>
+            <button type="button" class="c-alert-close" aria-label="Cerrar alerta de advertencia">×</button>
+          </div>
+
+          <div class="c-alert c-alert--info" role="status">
+            <span class="c-alert-icon" aria-hidden="true">ℹ</span>
+            <p class="c-alert-message">Hay una nueva versión disponible.</p>
+            <button type="button" class="c-alert-close" aria-label="Cerrar alerta informativa">×</button>
+          </div>
+        </div>
+
+        <div class="playground-behavior">
+          <dl>
+            <dt>Rol ARIA</dt>
+            <dd><code>role="status"</code> en éxito/informativo (se anuncian de forma educada, sin interrumpir); <code>role="alert"</code> en error/advertencia (se anuncian de inmediato por ser más urgentes).</dd>
+
+            <dt>Activación</dt>
+            <dd>El botón de cerrar es un <code>&lt;button&gt;</code> nativo: recibe foco con Tab y se activa con Enter o Espacio.</dd>
+
+            <dt>Foco al cerrar</dt>
+            <dd>La alerta no atrapa el foco en ningún momento; al cerrarla, el foco simplemente continúa con el siguiente elemento enfocable del flujo del documento.</dd>
+          </dl>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         2. BOTONES
+    ====================================================== -->
+    <section class="playground-section" id="seccion-botones" aria-labelledby="botones-heading">
+      <h2 id="botones-heading">Botones</h2>
+      <div class="playground-columns">
+
+        <div class="playground-demo">
+          <div class="c-btn-row">
+            <p class="c-btn-row-label">Primary — idle / disabled</p>
+            <button type="button" class="c-btn c-btn--primary">Guardar</button>
+            <button type="button" class="c-btn c-btn--primary" disabled>Guardar</button>
+          </div>
+          <div class="c-btn-row">
+            <p class="c-btn-row-label">Secondary — idle / disabled</p>
+            <button type="button" class="c-btn c-btn--secondary">Cancelar</button>
+            <button type="button" class="c-btn c-btn--secondary" disabled>Cancelar</button>
+          </div>
+          <div class="c-btn-row">
+            <p class="c-btn-row-label">Destructive — idle / disabled</p>
+            <button type="button" class="c-btn c-btn--destructive">Eliminar</button>
+            <button type="button" class="c-btn c-btn--destructive" disabled>Eliminar</button>
+          </div>
+          <div class="c-btn-row">
+            <p class="c-btn-row-label">Icon — idle / disabled</p>
+            <button type="button" class="c-btn c-btn--icon" aria-label="Más opciones">⋮</button>
+            <button type="button" class="c-btn c-btn--icon" aria-label="Más opciones" disabled>⋮</button>
+          </div>
+        </div>
+
+        <div class="playground-behavior">
+          <dl>
+            <dt>Activación</dt>
+            <dd>Al ser <code>&lt;button&gt;</code> nativos, Tab los enfoca en orden y Enter o Espacio los activa; no requieren JavaScript para esto.</dd>
+
+            <dt>Estados</dt>
+            <dd>Cada variante define reposo, hover, presionado (<code>:active</code>, con un leve <code>scale</code>) y deshabilitado; ninguno depende del estilo por defecto del navegador.</dd>
+
+            <dt>Deshabilitado</dt>
+            <dd>Usa el atributo nativo <code>disabled</code>: queda fuera del orden de Tab, no dispara clic ni hover, y baja su opacidad para que el estado sea evidente.</dd>
+
+            <dt>Icon button</dt>
+            <dd>No tiene texto visible, así que su nombre accesible viene de <code>aria-label</code> (ej. "Más opciones"); sin esto, un lector de pantalla no anunciaría su propósito.</dd>
+          </dl>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         3. CHECKBOXES/RADIOS
+    ====================================================== -->
+    <section class="playground-section" id="seccion-checkboxes-radios" aria-labelledby="checkboxes-radios-heading">
+      <h2 id="checkboxes-radios-heading">Checkboxes/Radios</h2>
+      <div class="playground-columns">
+
+        <div class="playground-demo">
+          <fieldset class="c-check-group">
+            <legend>Filtrar tabla por estado</legend>
+            <div class="c-check">
+              <input type="checkbox" id="filtro-activos" name="filtro-estado" value="activos">
+              <label for="filtro-activos">Activos</label>
+            </div>
+            <div class="c-check">
+              <input type="checkbox" id="filtro-pendientes" name="filtro-estado" value="pendientes">
+              <label for="filtro-pendientes">Pendientes</label>
+            </div>
+            <div class="c-check">
+              <input type="checkbox" id="filtro-archivados" name="filtro-estado" value="archivados">
+              <label for="filtro-archivados">Archivados</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="c-radio-group">
+            <legend>Ordenar tabla por</legend>
+            <div class="c-radio">
+              <input type="radio" id="orden-reciente" name="orden-tabla" value="reciente" checked>
+              <label for="orden-reciente">Más reciente</label>
+            </div>
+            <div class="c-radio">
+              <input type="radio" id="orden-nombre" name="orden-tabla" value="nombre">
+              <label for="orden-nombre">Nombre</label>
+            </div>
+            <div class="c-radio">
+              <input type="radio" id="orden-estado" name="orden-tabla" value="estado">
+              <label for="orden-estado">Estado</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="playground-behavior">
+          <dl>
+            <dt>Foco por grupo</dt>
+            <dd>Tab entra y sale del <code>fieldset</code> como una sola parada por grupo; dentro del grupo de radios, las flechas del teclado mueven el foco entre opciones y las seleccionan (comportamiento nativo del navegador por compartir <code>name</code>).</dd>
+
+            <dt>Activación</dt>
+            <dd>Espacio marca/desmarca un checkbox; en los radios, moverse con las flechas ya selecciona la opción.</dd>
+
+            <dt>Agrupación</dt>
+            <dd>El <code>legend</code> de cada <code>fieldset</code> da el nombre accesible del grupo completo, no solo de una opción.</dd>
+          </dl>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         4. DIALOGS
+    ====================================================== -->
+    <section class="playground-section" id="seccion-dialogs" aria-labelledby="dialogs-heading">
+      <h2 id="dialogs-heading">Dialogs</h2>
+      <div class="playground-columns">
+
+        <div class="playground-demo">
+          <button type="button" class="c-btn c-btn--destructive" id="btn-eliminar-recurso">
+            Eliminar recurso
+          </button>
+
+          <dialog class="c-dialog" id="dialog-confirmar-eliminar" aria-labelledby="dialog-confirmar-eliminar-title">
+            <h2 class="c-dialog-title" id="dialog-confirmar-eliminar-title">¿Eliminar este recurso?</h2>
+            <p>Esta acción no se puede deshacer. El recurso se eliminará de forma permanente.</p>
+            <div class="c-dialog-actions">
+              <button type="button" class="c-btn c-btn--secondary" data-dialog-cancel>Cancelar</button>
+              <button type="button" class="c-btn c-btn--destructive" data-dialog-confirm>Eliminar</button>
+            </div>
+          </dialog>
+        </div>
+
+        <div class="playground-behavior">
+          <dl>
+            <dt>Apertura</dt>
+            <dd>Enter o Espacio sobre "Eliminar recurso" (botón nativo) llama a <code>dialog.showModal()</code> — nunca <code>.show()</code> ni <code>confirm()</code> nativo.</dd>
+
+            <dt>Cierre</dt>
+            <dd>Escape cierra el diálogo de forma nativa (dispara <code>cancel</code> y luego <code>close</code>); "Cancelar" y "Eliminar" también lo cierran llamando a <code>dialog.close()</code>.</dd>
+
+            <dt>Atrapamiento de foco</dt>
+            <dd>Mientras está abierto como modal, el navegador restringe el foco a los elementos dentro del <code>&lt;dialog&gt;</code>; el resto de la página queda inerte para el teclado.</dd>
+
+            <dt>Foco al cerrar</dt>
+            <dd>Al cerrarse (por Escape o por botón), el foco vuelve exactamente al botón "Eliminar recurso" que lo abrió.</dd>
+          </dl>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         5. MENÚS
+    ====================================================== -->
+    <section class="playground-section" id="seccion-menus" aria-labelledby="menus-heading">
+      <h2 id="menus-heading">Menús</h2>
+      <div class="playground-columns">
+
+        <div class="playground-demo">
+          <div class="c-menu">
+            <button
+              type="button"
+              class="c-btn c-btn--secondary c-menu-account-toggle"
+              id="menu-cuenta-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="menu-cuenta"
+            >
+              Cuenta ▾
+            </button>
+            <ul class="c-menu-account" id="menu-cuenta" aria-labelledby="menu-cuenta-toggle" hidden>
+              <li><a href="#">Perfil</a></li>
+              <li><a href="#">Configuración</a></li>
+              <li><button type="button">Cerrar sesión</button></li>
+            </ul>
+          </div>
+
+          <div class="c-menu">
+            <button
+              type="button"
+              class="c-btn c-btn--icon c-menu-account-toggle"
+              id="menu-opciones-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="menu-opciones"
+              aria-label="Más opciones"
+            >
+              ⋮
+            </button>
+            <ul class="c-menu-account" id="menu-opciones" aria-labelledby="menu-opciones-toggle" hidden>
+              <li><a href="#">Perfil</a></li>
+              <li><a href="#">Configuración</a></li>
+              <li><button type="button">Cerrar sesión</button></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="playground-behavior">
+          <dl>
+            <dt>Apertura</dt>
+            <dd>Clic, o Enter/Espacio sobre el trigger (botón nativo), abre el desplegable y pone <code>aria-expanded="true"</code> en el trigger.</dd>
+
+            <dt>Cierre</dt>
+            <dd>Escape cierra el menú y devuelve el foco al trigger que lo abrió; un clic fuera del trigger y del menú también lo cierra (sin devolver el foco).</dd>
+
+            <dt>Estado</dt>
+            <dd><code>aria-expanded</code> en el trigger alterna entre <code>"true"</code> y <code>"false"</code> según el menú esté abierto o cerrado.</dd>
+
+            <dt>Foco dentro</dt>
+            <dd>Las opciones del menú son enlaces/botones reales, así que Tab las recorre en orden mientras el menú está abierto.</dd>
+          </dl>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         6. TOASTS
+    ====================================================== -->
+    <section class="playground-section" id="seccion-toasts" aria-labelledby="toasts-heading">
+      <h2 id="toasts-heading">Toasts</h2>
+      <div class="playground-columns">
+
+        <div class="playground-demo">
+          <div class="c-toast-container" aria-live="polite" aria-atomic="true">
+            <div class="c-toast c-toast--success">
+              <p>El producto se guardó correctamente.</p>
+            </div>
+            <div class="c-toast c-toast--error">
+              <p>No se pudo conectar con el servidor.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="playground-behavior">
+          <dl>
+            <dt>Foco</dt>
+            <dd>Los toasts no son foco-interactivos: nunca reciben ni roban el foco de lo que el usuario esté haciendo.</dd>
+
+            <dt>Anuncio</dt>
+            <dd>Se anuncian solos a lectores de pantalla porque viven dentro de un contenedor con <code>aria-live="polite"</code>; el anuncio espera a que el usuario termine su acción actual, sin interrumpir.</dd>
+
+            <dt>Ciclo de vida</dt>
+            <dd>Desaparecen por sí solos tras un tiempo fijo, sin que el usuario tenga que cerrarlos.</dd>
+
+            <dt>Límite</dt>
+            <dd>Como máximo 3 toasts visibles a la vez; si se agrega uno nuevo habiendo ya 3, se retira primero el más antiguo.</dd>
+          </dl>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/playground.js" defer></script>
+</body>
+</html>

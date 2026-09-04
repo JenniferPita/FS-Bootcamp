@@ -295,6 +295,56 @@ body.nav-open .main-nav {
   letter-spacing: -0.045em;
 }
 
+/*
+  Revelado del título del hero (ts/hero-typewriter.ts): .hero-title-ghost
+  es el mismo texto completo, siempre presente, pero pintado como una
+  sombra desenfocada (color transparente + text-shadow con blur, no una
+  copia con letras de otro color) para insinuar las letras que todavía
+  no se escribieron. .hero-title-text empieza vacío y el script lo va
+  llenando letra por letra, envolviendo cada carácter en su propio
+  <span> que hace fade-in con una animación corta; como el intervalo
+  entre letras es más chico que la duración de cada fade, varias letras
+  quedan animando a la vez y el efecto se siente fluido, no a saltos.
+*/
+.hero-title-wrap {
+  position: relative;
+  display: block;
+}
+
+.hero-title-ghost {
+  color: transparent;
+  text-shadow: 0 0 8px var(--color-text), 0 0 22px var(--color-text);
+  opacity: 0.4;
+}
+
+.hero-title-text {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-title-char {
+  /*
+    display:inline a propósito (no inline-block): envolver cada
+    carácter -incluidos los espacios- en inline-block rompe los puntos
+    de corte de línea normales y el texto revelado terminaba
+    ajustándose distinto que la sombra de abajo. Con inline puro el
+    ajuste de línea es idéntico al texto plano, así que ambas capas
+    cortan exactamente en el mismo lugar.
+  */
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+
+.hero-title-char.is-visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-char {
+    transition: none;
+  }
+}
+
 .hero-copy p {
   max-width: 570px;
   margin: 0 auto var(--space-7);
@@ -323,12 +373,83 @@ body.nav-open .main-nav {
    DASHBOARD MOCKUP
 ====================================================== */
 
+.dashboard-preview-wrap {
+  position: relative;
+}
+
 .dashboard-preview {
   padding: var(--space-3);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-dashboard-bg);
   box-shadow: var(--shadow-md);
+}
+
+/*
+  Insignias decorativas que flotan alrededor del mockup del hero
+  (puramente visuales, aria-hidden). Cada una tiene su propio delay de
+  animación para que floten de forma asincrónica, no todas juntas.
+*/
+.floating-badge {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  animation: floating-badge-bob 3.6s ease-in-out infinite;
+}
+
+.floating-badge svg {
+  width: 55%;
+  height: 55%;
+}
+
+.floating-badge-check {
+  top: -0.75rem;
+  right: 1.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--color-success);
+  animation-delay: 0s;
+}
+
+.floating-badge-box {
+  bottom: 0.5rem;
+  left: -0.9rem;
+  width: 3rem;
+  height: 3rem;
+  color: var(--color-primary);
+  animation-delay: 0.9s;
+}
+
+.floating-badge-spark {
+  top: 2.5rem;
+  left: -0.6rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background: none;
+  box-shadow: none;
+  color: var(--color-primary);
+  animation-delay: 1.8s;
+}
+
+@keyframes floating-badge-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.6rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-badge {
+    animation: none;
+  }
 }
 
 .dashboard-window {
@@ -358,14 +479,33 @@ body.nav-open .main-nav {
   padding: var(--space-5);
 }
 
-.dashboard-title {
+.dashboard-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
   margin-bottom: var(--space-4);
+}
+
+.dashboard-title {
   font-weight: var(--font-weight-extrabold);
 }
 
+.dashboard-period {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/*
+  A diferencia del resto de los grids de la página, este se mantiene
+  en 2 columnas incluso en mobile (no es mobile-first hacia 1
+  columna): con 4 métricas cortas, 2x2 se lee mejor que una sola
+  columna angosta y larga.
+*/
 .metric-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-3);
 }
 
@@ -373,6 +513,18 @@ body.nav-open .main-nav {
   padding: var(--space-4);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
+}
+
+/*
+  Distingue "Con stock bajo" del resto: es la única métrica que
+  representa algo que requiere atención, no solo un conteo neutro.
+*/
+.metric-warning {
+  border-color: var(--color-danger);
+}
+
+.metric-warning strong {
+  color: var(--color-danger);
 }
 
 .metric span {
@@ -387,12 +539,18 @@ body.nav-open .main-nav {
   font-size: var(--font-size-lg);
 }
 
+.stock-chart-caption {
+  margin-top: var(--space-3);
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+
 .stock-chart {
   height: 9rem;
   display: flex;
   align-items: end;
   gap: 0.6rem;
-  margin-top: var(--space-3);
+  margin-top: var(--space-2);
   padding: var(--space-4);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
@@ -412,7 +570,8 @@ body.nav-open .main-nav {
 .bar:nth-child(6) { height: 90%; }
 .bar:nth-child(7) { height: 72%; }
 /* =====================================================
-   FUNCIONALIDADES
+   NOSOTROS + FUNCIONALIDADES
+   (comparten .features-grid/.feature-card más abajo)
 ====================================================== */
 
 .features-grid {
@@ -421,25 +580,78 @@ body.nav-open .main-nav {
   gap: var(--space-4);
 }
 
+/*
+  Enlace "ver más" debajo de una grilla de tarjetas resumida (Nosotros
+  y Funcionalidades en index.html, que ahora son teasers de
+  nosotros.html/funcionalidades.html).
+*/
+.section-cta {
+  margin: var(--space-6) 0 0;
+  text-align: center;
+}
+
+/*
+  --card-rotate combina con --reveal-y (de [data-reveal], ver
+  base.css) en una sola declaración de "transform": si en vez de eso
+  cada regla pusiera su propio "transform: rotate(...)" o
+  "transform: translateY(...)" directo, ganaría solo una (mismo
+  elemento, mismo tipo de propiedad) y se perdería el otro efecto.
+  Usando variables, las reglas de rotación de abajo y el fade de
+  entrada solo tocan su propia variable, nunca "transform" en sí.
+
+  transition incluye opacity por la misma razón: .feature-card
+  también lleva data-reveal, y como ambas reglas declaran
+  "transition" en el mismo elemento, la que se carga después (esta)
+  reemplaza por completo a la otra en vez de combinarse.
+*/
 .feature-card {
+  --card-rotate: 0deg;
   min-height: 12rem;
   padding: var(--space-6);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface);
   box-shadow: var(--shadow-sm);
+  transform: translateY(var(--reveal-y, 0px)) rotate(var(--card-rotate));
+  transition: transform 0.3s ease, box-shadow 0.25s ease, border-color 0.25s ease, opacity 0.5s ease;
+}
+
+.features-grid .feature-card:hover {
+  transform: translateY(-0.35rem);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
 }
 
 .feature-icon {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   display: grid;
   place-items: center;
   margin-bottom: var(--space-4);
-  border-radius: 0.7rem;
+  border-radius: 0.85rem;
   background: var(--color-feature-icon-bg);
   color: var(--color-primary);
-  font-weight: var(--font-weight-extrabold);
+  transition: transform 0.3s ease;
+}
+
+.feature-icon svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.12) rotate(-6deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-card,
+  .feature-icon {
+    transition: none;
+  }
+
+  .feature-card:hover .feature-icon {
+    transform: none;
+  }
 }
 
 .feature-card h3 {
@@ -462,22 +674,83 @@ body.nav-open .main-nav {
   gap: var(--space-4);
 }
 
+/*
+  transform/transition combinan con [data-reveal] (ver base.css) por
+  la misma razón que .feature-card en la sección de Funcionalidades:
+  .step también lleva data-reveal, y como las dos reglas declaran
+  "transition"/"transform" en el mismo elemento, la que se carga
+  después (esta) reemplaza por completo a la otra en vez de
+  combinarse, así que esta tiene que cubrir los dos usos.
+*/
 .step {
+  position: relative;
   padding: var(--space-7);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface);
+  transform: translateY(var(--reveal-y, 0px));
+  transition: transform 0.3s ease, box-shadow 0.25s ease, border-color 0.25s ease, opacity 0.5s ease;
 }
 
-.step-number {
-  width: 2.4rem;
-  height: 2.4rem;
+.step:hover {
+  transform: translateY(-0.35rem);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+/*
+  Conector entre pasos: una marca corta que ocupa el espacio del gap
+  entre tarjetas (no un puente hasta el centro exacto de cada
+  círculo), a la altura de la insignia. Vertical en mobile (columna
+  única); pasa a horizontal en el breakpoint de escritorio donde
+  .steps se vuelve una fila de 3 columnas (ver responsive.css).
+*/
+.steps .step:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--space-4));
+  left: calc(var(--space-7) + 1.375rem);
+  width: 2px;
+  height: var(--space-4);
+  background: var(--color-border);
+}
+
+.step-icon {
+  position: relative;
+  width: 2.75rem;
+  height: 2.75rem;
   display: grid;
   place-items: center;
   margin-bottom: var(--space-4);
+  border-radius: 0.85rem;
+  background: var(--color-feature-icon-bg);
+  color: var(--color-primary);
+}
+
+.step-icon svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+/*
+  Chip numerado superpuesto en la esquina de la insignia: conserva la
+  lectura de "paso 1/2/3" además del ícono. border del mismo color
+  que el fondo de la tarjeta para separarlo visualmente de la
+  insignia, en vez de que se vean pegados.
+*/
+.step-number {
+  position: absolute;
+  right: -0.4rem;
+  bottom: -0.4rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--color-surface);
   border-radius: 50%;
   background: var(--color-ink);
   color: var(--color-ink-contrast);
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-extrabold);
 }
 
@@ -488,6 +761,12 @@ body.nav-open .main-nav {
 .step p {
   margin: 0;
   color: var(--color-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step {
+    transition: opacity 0.3s ease;
+  }
 }
 /* =====================================================
    RESULTADOS
@@ -526,6 +805,14 @@ body.nav-open .main-nav {
 .result span {
   color: #c7c7c7;
 }
+
+.results-note {
+  margin: var(--space-4) 0 0;
+  color: #c7c7c7;
+  font-size: var(--font-size-xs);
+  text-align: center;
+}
+
 /* =====================================================
    BANNER ROTATIVO DE CLIENTES
    ====================================================== */
@@ -539,11 +826,18 @@ body.nav-open .main-nav {
   width: 100%;
   overflow: hidden;
   padding-block: var(--space-4);
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.clients-banner.is-dragging {
+  cursor: grabbing;
+  user-select: none;
 }
 
 /*
-  Dos pistas idénticas permiten crear un desplazamiento
-  continuo sin JavaScript.
+  Dos pistas idénticas permiten crear un desplazamiento continuo (y
+  que arrastrar hacia cualquier lado nunca se quede sin contenido).
 */
 .clients-track {
   display: flex;
@@ -591,15 +885,6 @@ body.nav-open .main-nav {
 }
 
 /*
-  El usuario puede detener la animación colocando el cursor
-  sobre el banner.
-*/
-.clients-banner:hover .clients-track,
-.clients-banner:focus-within .clients-track {
-  animation-play-state: paused;
-}
-
-/*
   Respeta las preferencias de usuarios que prefieren
   reducir el movimiento.
 */
@@ -611,23 +896,132 @@ body.nav-open .main-nav {
 
 /* =====================================================
    TESTIMONIOS
+   Carrusel vertical (ts/testimonials-carousel.ts): un testimonio
+   activo al centro, uno anterior y uno siguiente asomando arriba y
+   abajo (desenfocados/achicados), auto-avanza cada 5s, con flechas y
+   arrastre vertical para cambiar a mano.
 ====================================================== */
 
-.testimonials-grid {
+.testimonials-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-4);
+  align-items: center;
+  gap: var(--space-8);
 }
 
-.testimonial-card {
+.testimonials-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+.testimonials-intro .section-header {
+  margin: 0;
+  max-width: none;
+  text-align: left;
+}
+
+/*
+  Barra de progreso decorativa antes del eyebrow, como en la
+  referencia de diseño que pidió el usuario.
+*/
+.testimonials-intro .eyebrow {
+  position: relative;
+  padding-left: 2.2rem;
+}
+
+.testimonials-intro .eyebrow::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 1.6rem;
+  height: 2px;
+  background: var(--color-primary);
+  transform: translateY(-50%);
+}
+
+.testimonial-carousel {
+  --peek-offset: 11rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.testimonial-viewport {
+  position: relative;
+  height: 26rem;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-x;
+}
+
+.testimonial-carousel.is-dragging .testimonial-viewport {
+  cursor: grabbing;
+}
+
+.testimonial-track {
+  position: absolute;
+  inset: 0;
+}
+
+.testimonial-slide {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
   padding: var(--space-6);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface);
   box-shadow: var(--shadow-sm);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease, filter 0.5s ease, box-shadow 0.5s ease;
 }
 
-.testimonial-card blockquote {
+.testimonial-carousel.is-dragging .testimonial-slide {
+  transition: none;
+}
+
+.testimonial-slide[data-position="active"] {
+  transform: translateY(calc(-50% + var(--drag-offset, 0px)));
+  opacity: 1;
+  filter: blur(0);
+  z-index: 3;
+  box-shadow: var(--shadow-md);
+}
+
+.testimonial-slide[data-position="prev"] {
+  transform: translateY(calc(-50% - var(--peek-offset) + var(--drag-offset, 0px))) scale(0.94);
+  opacity: 0.45;
+  filter: blur(1.5px);
+  z-index: 2;
+}
+
+.testimonial-slide[data-position="next"] {
+  transform: translateY(calc(-50% + var(--peek-offset) + var(--drag-offset, 0px))) scale(0.94);
+  opacity: 0.45;
+  filter: blur(1.5px);
+  z-index: 2;
+}
+
+.testimonial-slide[data-position="hidden"] {
+  transform: translateY(-50%);
+  opacity: 0;
+  z-index: 1;
+}
+
+.testimonial-quote-mark {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--color-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 3rem;
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1;
+}
+
+.testimonial-slide blockquote {
   margin: 0 0 var(--space-4);
   color: var(--color-text);
   font-size: var(--font-size-md);
@@ -636,8 +1030,27 @@ body.nav-open .main-nav {
 
 .testimonial-author {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
   font-style: normal;
+}
+
+.testimonial-avatar {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-feature-icon-bg);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.testimonial-author-info {
+  display: flex;
+  flex-direction: column;
 }
 
 .testimonial-name {
@@ -647,6 +1060,45 @@ body.nav-open .main-nav {
 .testimonial-role {
   color: var(--color-muted);
   font-size: var(--font-size-sm);
+}
+
+.testimonial-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.testimonial-nav-btn {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.testimonial-nav-btn:hover {
+  background: var(--color-primary);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.testimonial-nav-btn svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-slide {
+    transition: opacity 0.3s ease;
+  }
 }
 
 /* =====================================================
@@ -721,6 +1173,52 @@ body.nav-open .main-nav {
 .price-card .button {
   width: 100%;
 }
+
+/*
+  Tabla comparativa usada solo en precios.html. El wrap con
+  overflow-x: auto contiene el scroll horizontal dentro de la
+  tabla en mobile, sin afectar el scroll de la página.
+*/
+.pricing-table-wrap {
+  margin-top: var(--space-8);
+  overflow-x: auto;
+}
+
+.pricing-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.pricing-table thead th {
+  color: var(--color-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.pricing-table th[scope="row"] {
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+}
+
+.pricing-table .table-check {
+  color: var(--color-success);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.pricing-table .table-cross {
+  color: var(--color-muted);
+}
+
 /* =====================================================
    FAQ
 ====================================================== */
@@ -977,6 +1475,34 @@ body.nav-open .main-nav {
 .auth-layout .hero-copy {
   text-align: center;
 }
+
+/* =====================================================
+   LEGAL (TÉRMINOS / PRIVACIDAD)
+====================================================== */
+
+.legal-content {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.legal-content h2 {
+  margin: var(--space-8) 0 var(--space-3);
+  font-size: var(--font-size-lg);
+}
+
+.legal-content h2:first-of-type {
+  margin-top: 0;
+}
+
+.legal-content p,
+.legal-content li {
+  color: var(--color-text);
+}
+
+.legal-content p + p {
+  margin-top: var(--space-3);
+}
+
 /* =====================================================
    CTA
 ====================================================== */
@@ -1097,4 +1623,381 @@ body.nav-open .main-nav {
 .chatbot:hover {
   background: var(--color-ink);
   color: var(--color-ink-contrast);
+}
+
+/*
+  --color-ink es un acento oscuro constante que NO cambia entre temas
+  (a diferencia de --color-text/--color-primary), así que en oscuro
+  terminaba siendo un signo de interrogación casi negro sobre un
+  fondo casi negro (--color-surface), prácticamente invisible. En
+  oscuro usamos --color-primary en su lugar -ya pensado para tener
+  contraste sobre fondos oscuros- para que el botón se note.
+*/
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .chatbot {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  :root:not([data-theme="light"]) .chatbot:hover {
+    background: var(--color-primary);
+    color: var(--color-ink-contrast);
+  }
+}
+
+:root[data-theme="dark"] .chatbot {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+:root[data-theme="dark"] .chatbot:hover {
+  background: var(--color-primary);
+  color: var(--color-ink-contrast);
+}
+
+.chatbot-panel {
+  position: fixed;
+  right: 0.75rem;
+  bottom: 4.5rem;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  width: min(90vw, 320px);
+  max-height: min(70vh, 480px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  /*
+    Sin overflow:hidden a propósito: la burbuja de preguntas
+    frecuentes (más abajo) se posiciona con position:absolute y
+    tiene que poder salirse de esta caja hacia el costado/arriba.
+    Las esquinas redondeadas del header se resuelven con su propio
+    border-radius en vez de depender del recorte del panel.
+  */
+}
+
+/*
+  El atributo [hidden] nativo compite en especificidad con
+  .chatbot-panel { display: flex } de arriba — como ambas reglas
+  vienen del autor, "gana" la última en cascada, no el navegador,
+  así que sin este override .hidden = true no ocultaba nada.
+  Misma razón por la que .chatbot-questions-bubble más abajo también
+  necesita su propio [hidden].
+*/
+.chatbot-panel[hidden] {
+  display: none;
+}
+
+.chatbot-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: var(--color-ink);
+  color: var(--color-ink-contrast);
+  font-weight: var(--font-weight-bold);
+}
+
+.chatbot-panel-close {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.chatbot-panel-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.chatbot-panel-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  overflow-y: auto;
+}
+
+.chatbot-panel-body p {
+  margin: 0;
+}
+
+.chatbot-transcript {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.chatbot-transcript:empty {
+  display: none;
+}
+
+.chatbot-message {
+  max-width: 90%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+}
+
+.chatbot-message-bot {
+  align-self: flex-start;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.chatbot-message-user {
+  align-self: flex-end;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.chatbot-message-link {
+  align-self: flex-start;
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+/*
+  Indicador de "escribiendo..." — tres puntos con rebote
+  escalonado. Se agrega/quita del transcript por JS antes de
+  mostrar la respuesta real.
+*/
+.chatbot-typing {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.chatbot-typing span {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--color-muted);
+  animation: chatbot-typing-bounce 1s ease-in-out infinite;
+}
+
+.chatbot-typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.chatbot-typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes chatbot-typing-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+
+  30% {
+    transform: translateY(-0.2rem);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chatbot-typing span {
+    animation: none;
+  }
+}
+
+/*
+  Preguntas frecuentes: el toggle vive en .chatbot-quick-help, y
+  las preguntas se muestran en una burbuja aparte (posicionada
+  con position:absolute respecto a .chatbot-quick-help, así que
+  sigue al panel sin importar el viewport). En mobile no entra al
+  lado sin salirse de la pantalla, así que aparece arriba del
+  panel; a partir de 621px (ver responsive.css) pasa al costado.
+*/
+.chatbot-quick-help {
+  /*
+    Sin position:relative a propósito: la burbuja de abajo necesita
+    .chatbot-panel completo (position:fixed, más arriba) como
+    referencia para su position:absolute, no solo esta fila del
+    botón — si no, "bottom: 100%" solo despeja el alto del botón
+    en vez del panel entero y la burbuja termina tapándolo.
+  */
+  flex-shrink: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.chatbot-faq-toggle {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-align: left;
+  cursor: pointer;
+}
+
+.chatbot-faq-toggle:hover {
+  background: var(--color-surface-hover);
+}
+
+/*
+  Mobile-first a propósito: sin espacio para mostrarla al costado
+  sin salirse de la pantalla, así que por defecto ocupa el mismo
+  lugar que .chatbot-panel (puede taparlo). Desde 621px (ver
+  responsive.css) pasa a mostrarse al costado, sin tapar nada.
+
+  Se anima con opacity/transform + visibility (mismo patrón que ya
+  usa .main-nav/.nav-overlay para el drawer), no con [hidden]: los
+  cambios de "display" no se pueden animar, así que .is-open es lo
+  que agrega/quita JS en vez de tocar el atributo hidden.
+*/
+.chatbot-questions-bubble {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(90vw, 320px);
+  max-height: min(60vh, 400px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem) scale(0.97);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+.chatbot-questions-bubble.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chatbot-questions-bubble {
+    transition: opacity 0.15s ease, visibility 0.15s;
+    transform: none;
+  }
+}
+
+.chatbot-questions-bubble-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.chatbot-questions-bubble-close {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.chatbot-questions-bubble-close:hover {
+  background: var(--color-surface-hover);
+}
+
+.chatbot-questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  overflow-y: auto;
+}
+
+.chatbot-question {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.chatbot-question:hover {
+  background: var(--color-surface-hover);
+}
+/* =====================================================
+   PÁGINA DE DETALLE: FUNCIONALIDADES
+   (funcionalidades.html — versión expandida de las cards
+   resumidas que quedaron en index.html)
+====================================================== */
+
+.feature-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.feature-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.feature-detail:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.feature-detail .feature-icon {
+  margin-bottom: 0;
+}
+
+.feature-detail h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-lg);
+}
+
+.feature-detail p {
+  margin: 0 0 var(--space-3);
+  color: var(--color-muted);
+}
+
+.feature-detail ul {
+  margin: 0;
+  padding-left: var(--space-5);
+  color: var(--color-text);
+}
+
+.feature-detail li {
+  margin-bottom: var(--space-2);
+}
+
+.feature-detail li:last-child {
+  margin-bottom: 0;
 }

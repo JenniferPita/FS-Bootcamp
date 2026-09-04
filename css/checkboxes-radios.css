@@ -1,0 +1,51 @@
+.c-check-group,
+.c-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.c-check-group legend,
+.c-radio-group legend {
+    padding: 0;
+    margin-bottom: var(--space-2);
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+.c-check,
+.c-radio {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+.c-check:hover,
+.c-radio:hover {
+    background-color: var(--color-surface-hover);
+}
+.c-check input,
+.c-radio input {
+    flex-shrink: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+.c-check label,
+.c-radio label {
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    user-select: none;
+}
+
+@media (max-width: 480px) {
+}
+
+@media (max-width: 768px) {
+}

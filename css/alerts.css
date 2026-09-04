@@ -1,0 +1,88 @@
+.c-alert {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-2);
+    border: 1px solid;
+    border-radius: var(--radius-sm);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+}
+.c-alert--success {
+    border-color: var(--semantic-success);
+    background: color-mix(in srgb, var(--semantic-success) 10%, var(--color-surface));
+}
+.c-alert--error {
+    border-color: var(--semantic-error);
+    background: color-mix(in srgb, var(--semantic-error) 10%, var(--color-surface));
+}
+.c-alert--warning {
+    border-color: var(--semantic-warning);
+    background: color-mix(in srgb, var(--semantic-warning) 16%, var(--color-surface));
+}
+.c-alert--info {
+    border-color: var(--semantic-info);
+    background: color-mix(in srgb, var(--semantic-info) 10%, var(--color-surface));
+}
+.c-alert-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding-top: 0.15rem;
+    font-size: var(--font-size-md);
+}
+.c-alert-message {
+    flex: 1 1 auto;
+    margin: 0;
+    padding-top: 0.15rem;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-base);
+}
+.c-alert-close {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-left: auto;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: none;
+    appearance: none;
+    color: var(--color-muted);
+    font: inherit;
+    font-size: var(--font-size-base);
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+.c-alert-close:hover {
+    background: color-mix(in srgb, currentColor 14%, transparent);
+    color: var(--color-text);
+}
+.c-alert-close:active {
+    background: color-mix(in srgb, currentColor 22%, transparent);
+}
+.c-alert--success .c-alert-icon {
+    color: var(--semantic-success);
+}
+.c-alert--error .c-alert-icon {
+    color: var(--semantic-error);
+}
+.c-alert--warning .c-alert-icon {
+    color: var(--semantic-warning);
+}
+.c-alert--info .c-alert-icon {
+    color: var(--semantic-info);
+}
+
+@media (max-width: 480px) {
+}
+
+@media (max-width: 768px) {
+}
