@@ -23,3 +23,7 @@
 @import "menus.css";
 @import "toasts.css";
 @import "responsive.css";
+
+/* Integración ET-01: select adaptado al formulario original */
+#registro .stockflow-plan-select { width: 100%; padding: 12px 14px; border: 1px solid var(--color-border, #a9b2c4); border-radius: 8px; color: inherit; background: var(--color-surface, #fff); font: inherit; }
+#registro .stockflow-plan-select:focus { outline: 2px solid #4b78df; outline-offset: 2px; }

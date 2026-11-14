@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const validateField = (field) => {
         const message = field.validate(field.input.value);
         showFieldError(field, message);
+        field.input.closest(".form-group")?.classList.add("was-validated");
         return !message;
     };
     fields.forEach((field) => {
@@ -81,6 +82,15 @@ document.addEventListener("DOMContentLoaded", () => {
         feedback.classList.toggle("is-success", isSuccess);
         feedback.classList.toggle("is-error", !isSuccess);
     };
+    const clearErrorFeedback = () => {
+        if (feedback.classList.contains("is-error")) {
+            feedback.textContent = "";
+            feedback.classList.remove("is-error");
+        }
+    };
+    form.addEventListener("focusin", clearErrorFeedback);
+    form.addEventListener("input", clearErrorFeedback);
+    form.addEventListener("change", clearErrorFeedback);
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         const results = fields.map((field) => validateField(field));
@@ -93,6 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         showFeedback("¡Gracias! Tu mensaje fue enviado correctamente.", true);
         form.reset();
-        fields.forEach((field) => showFieldError(field, ""));
+        fields.forEach((field) => {
+            showFieldError(field, "");
+            field.input.closest(".form-group")?.classList.remove("was-validated");
+        });
     });
 });

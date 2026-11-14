@@ -273,7 +273,7 @@ body.nav-open .main-nav {
 ====================================================== */
 
 .hero {
-  padding-block: var(--space-12) var(--space-14);
+  padding-block: var(--space-12);
 }
 
 .hero-grid {
@@ -1318,25 +1318,26 @@ body.nav-open .main-nav {
 
 /*
   FEEDBACK NATIVO DE VALIDACIÓN (:valid / :invalid / :focus)
-  :not(:placeholder-shown) evita marcar un campo en rojo/verde
-  antes de que el usuario escriba algo (por eso los inputs de
-  texto/email/password tienen un placeholder, aunque sea " ").
-  Los checkboxes quedan afuera: no tienen :placeholder-shown, así
-  que :invalid se activaría desde que carga la página.
+  .was-validated se agrega por JS recién cuando el campo pierde el
+  foco (o cambia, para checkboxes) — así el ícono ✓/✕ y el tinte de
+  fondo aparecen cuando el usuario pasa al siguiente campo, nunca
+  mientras todavía está escribiendo. Los checkboxes quedan afuera
+  del selector de :invalid porque no tienen un estado neutro previo
+  al primer render (siempre son válidos o inválidos).
   El color nunca es la única señal: además del borde, se agrega
   un ícono (✓/✕) y el fondo cambia con un tinte sutil; el texto
   del error sigue viviendo en .form-error, como ya hacía el sitio.
 */
 
-.form-group input:not(.form-checkbox):not(:placeholder-shown):invalid,
-.form-group textarea:not(:placeholder-shown):invalid,
+.form-group.was-validated input:not(.form-checkbox):invalid,
+.form-group.was-validated textarea:invalid,
 /*
   Repetir ".form-group" tres veces es a propósito: la regla nativa
-  :valid de abajo ya suma 4 selectores de clase por sus :not(), así
-  que esto necesita superar ese número (no empatar) para que el JS
-  (que detecta cosas que la validación nativa no puede, como
-  "las contraseñas no coinciden") siempre gane visualmente aunque
-  el campo sea nativamente válido.
+  :valid de abajo ya suma 4 selectores de clase por sus .was-validated
+  y :not(), así que esto necesita superar ese número (no empatar)
+  para que el JS (que detecta cosas que la validación nativa no
+  puede, como "las contraseñas no coinciden") siempre gane
+  visualmente aunque el campo sea nativamente válido.
 */
 .form-group.form-group.form-group.is-invalid input:not(.form-checkbox),
 .form-group.form-group.form-group.is-invalid textarea {
@@ -1353,8 +1354,8 @@ body.nav-open .main-nav {
   background-size: 1.1rem, 100% 100%;
 }
 
-.form-group input:not(.form-checkbox):not(:placeholder-shown):valid,
-.form-group textarea:not(:placeholder-shown):valid {
+.form-group.was-validated input:not(.form-checkbox):valid,
+.form-group.was-validated textarea:valid {
   border-color: var(--color-success);
   padding-right: 2.5rem;
   background-image:
@@ -1388,8 +1389,8 @@ body.nav-open .main-nav {
   para que siga siendo legible sobre el fondo oscuro del input.
 */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .form-group input:not(.form-checkbox):not(:placeholder-shown):invalid,
-  :root:not([data-theme="light"]) .form-group textarea:not(:placeholder-shown):invalid,
+  :root:not([data-theme="light"]) .form-group.was-validated input:not(.form-checkbox):invalid,
+  :root:not([data-theme="light"]) .form-group.was-validated textarea:invalid,
   :root:not([data-theme="light"]) .form-group.form-group.form-group.is-invalid input:not(.form-checkbox),
   :root:not([data-theme="light"]) .form-group.form-group.form-group.is-invalid textarea {
     background-image:
@@ -1400,8 +1401,8 @@ body.nav-open .main-nav {
       );
   }
 
-  :root:not([data-theme="light"]) .form-group input:not(.form-checkbox):not(:placeholder-shown):valid,
-  :root:not([data-theme="light"]) .form-group textarea:not(:placeholder-shown):valid {
+  :root:not([data-theme="light"]) .form-group.was-validated input:not(.form-checkbox):valid,
+  :root:not([data-theme="light"]) .form-group.was-validated textarea:valid {
     background-image:
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='%233ddc84' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),
       linear-gradient(
@@ -1411,8 +1412,8 @@ body.nav-open .main-nav {
   }
 }
 
-:root[data-theme="dark"] .form-group input:not(.form-checkbox):not(:placeholder-shown):invalid,
-:root[data-theme="dark"] .form-group textarea:not(:placeholder-shown):invalid,
+:root[data-theme="dark"] .form-group.was-validated input:not(.form-checkbox):invalid,
+:root[data-theme="dark"] .form-group.was-validated textarea:invalid,
 :root[data-theme="dark"] .form-group.form-group.form-group.is-invalid input:not(.form-checkbox),
 :root[data-theme="dark"] .form-group.form-group.form-group.is-invalid textarea {
   background-image:
@@ -1423,8 +1424,8 @@ body.nav-open .main-nav {
     );
 }
 
-:root[data-theme="dark"] .form-group input:not(.form-checkbox):not(:placeholder-shown):valid,
-:root[data-theme="dark"] .form-group textarea:not(:placeholder-shown):valid {
+:root[data-theme="dark"] .form-group.was-validated input:not(.form-checkbox):valid,
+:root[data-theme="dark"] .form-group.was-validated textarea:valid {
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='%233ddc84' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),
     linear-gradient(
@@ -1506,10 +1507,6 @@ body.nav-open .main-nav {
 /* =====================================================
    CTA
 ====================================================== */
-
-.final-cta {
-  padding-block: var(--space-20);
-}
 
 .cta-box {
   padding: clamp(2rem, 6vw, 4rem);

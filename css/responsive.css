@@ -19,12 +19,8 @@
     font-size: 1.15rem;
   }
 
-  .section {
-    padding-block: var(--space-20);
-  }
-
   .hero {
-    padding-block: var(--space-16) var(--space-20);
+    padding-block: var(--space-16) var(--space-12);
   }
 
   .hero-actions {

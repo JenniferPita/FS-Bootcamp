@@ -122,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ? validateTerminos()
         : field.validate(field.input.value);
     showFieldError(field, message);
+    field.input.closest(".form-group")?.classList.add("was-validated");
     return !message;
   };
 
@@ -148,6 +149,17 @@ document.addEventListener("DOMContentLoaded", () => {
     feedback.classList.toggle("is-error", !isSuccess);
   };
 
+  const clearErrorFeedback = (): void => {
+    if (feedback.classList.contains("is-error")) {
+      feedback.textContent = "";
+      feedback.classList.remove("is-error");
+    }
+  };
+
+  form.addEventListener("focusin", clearErrorFeedback);
+  form.addEventListener("input", clearErrorFeedback);
+  form.addEventListener("change", clearErrorFeedback);
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -168,6 +180,9 @@ document.addEventListener("DOMContentLoaded", () => {
       true
     );
     form.reset();
-    fields.forEach((field) => showFieldError(field, ""));
+    fields.forEach((field) => {
+      showFieldError(field, "");
+      field.input.closest(".form-group")?.classList.remove("was-validated");
+    });
   });
 });

@@ -16,7 +16,7 @@
 */
 
 .section {
-  padding-block: var(--space-14);
+  padding-block: var(--space-12);
 }
 
 .section-header {

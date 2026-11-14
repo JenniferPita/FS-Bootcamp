@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const validateField = () => {
         const message = field.validate(field.input.value);
         showFieldError(message);
+        field.input.closest(".form-group")?.classList.add("was-validated");
         return !message;
     };
     field.input.addEventListener("blur", validateField);
@@ -50,6 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
         feedback.classList.toggle("is-success", isSuccess);
         feedback.classList.toggle("is-error", !isSuccess);
     };
+    const clearErrorFeedback = () => {
+        if (feedback.classList.contains("is-error")) {
+            feedback.textContent = "";
+            feedback.classList.remove("is-error");
+        }
+    };
+    form.addEventListener("focusin", clearErrorFeedback);
+    form.addEventListener("input", clearErrorFeedback);
+    form.addEventListener("change", clearErrorFeedback);
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         if (!validateField()) {
@@ -60,5 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
         showFeedback("Si el correo existe en nuestro sistema, te enviaremos instrucciones para restablecer tu contraseña.", true);
         form.reset();
         showFieldError("");
+        field.input.closest(".form-group")?.classList.remove("was-validated");
     });
 });
