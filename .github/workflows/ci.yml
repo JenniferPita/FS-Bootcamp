@@ -36,7 +36,7 @@ jobs:
 
       - name: Compilar frontend
         working-directory: app
-        run: npm run build:ci-error
+        run: npm run build
 
       - name: Verificar archivos generados
         run: |
