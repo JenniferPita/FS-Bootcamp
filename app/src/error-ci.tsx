@@ -1,1 +1,1 @@
-export const ErrorCI = () => <h1>Error de prueba</h2>;
+export const ErrorCI = () => <h1>Error de prueba</h1>;
