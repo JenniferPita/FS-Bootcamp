@@ -2,10 +2,6 @@
 name: CI - StockFlow React
 
 on:
-  push:
-    branches:
-      - main
-      - 'test/**'
   pull_request:
     branches:
       - main
@@ -16,7 +12,7 @@ permissions:
 
 jobs:
   build:
-    name: Instalar y compilar React
+    name: ESLint y compilacion React
     runs-on: ubuntu-latest
 
     steps:
@@ -34,11 +30,21 @@ jobs:
         working-directory: app
         run: npm ci
 
-      - name: Compilar frontend
+      - name: Validar ESLint
+        working-directory: app
+        run: npm run lint
+
+      - name: Compilar React
         working-directory: app
         run: npm run build
 
       - name: Verificar archivos generados
-        run: |
-          test -f dist/index.html
-          echo "Compilación de StockFlow exitosa"
+        run: test -f dist/index.html
+
+      - name: Guardar artefacto dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: stockflow-dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
