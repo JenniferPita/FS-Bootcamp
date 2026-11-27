@@ -1,11 +1,12 @@
 
-name: CI/CD - StockFlow React
+name: CI - StockFlow React
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-  push:
+      - feature/ai-cloud
+  pull_request:
     branches:
       - main
   workflow_dispatch:
@@ -15,8 +16,12 @@ permissions:
 
 jobs:
   build:
-    name: ESLint y compilacion React
+    name: Validacion y compilacion React
     runs-on: ubuntu-latest
+
+    env:
+      VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
 
     steps:
       - name: Descargar repositorio
@@ -33,16 +38,30 @@ jobs:
         working-directory: app
         run: npm ci
 
+      - name: Verificar configuracion publica
+        run: |
+          test -n "$VITE_SUPABASE_URL"
+          test -n "$VITE_SUPABASE_PUBLISHABLE_KEY"
+
       - name: Validar ESLint
         working-directory: app
         run: npm run lint
+
+      - name: Validar TypeScript
+        working-directory: app
+        run: npm run check
 
       - name: Compilar React
         working-directory: app
         run: npm run build
 
       - name: Verificar archivos generados
-        run: test -f dist/index.html
+        run: |
+          test -f dist/index.html
+          test -f dist/app/index.html
+
+      - name: Registrar commit del build
+        run: echo "$GITHUB_SHA" > dist/version.txt
 
       - name: Guardar artefacto dist
         uses: actions/upload-artifact@v4
@@ -50,33 +69,4 @@ jobs:
           name: stockflow-dist
           path: dist/
           if-no-files-found: error
-          retention-days: 7
-
-  deploy:
-    name: Desplegar en Amazon S3
-    needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Descargar artefacto
-        uses: actions/download-artifact@v4
-        with:
-          name: stockflow-dist
-          path: dist/
-
-      - name: Configurar credenciales AWS
-        uses: aws-actions/configure-aws-credentials@v6
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: ${{ vars.AWS_REGION }}
-
-      - name: Verificar identidad AWS
-        run: aws sts get-caller-identity
-
-      - name: Publicar en S3
-        env:
-          BUCKET: ${{ vars.S3_BUCKET_NAME }}
-        run: aws s3 sync dist/ "s3://$BUCKET/" --delete
+          retention-days: 30
