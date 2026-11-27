@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { NavLink, Route, Routes, useLocation } from 'react-router';
 import { Menu } from '@mantine/core';
@@ -19,6 +18,7 @@ import TestInviteAuth from './pages/TestInviteAuth';
 import ProductsList from './pages/ProductsList';
 import Users from './pages/Users';
 import Subscription from './pages/Subscription';
+import InventoryAnalysis from './pages/InventoryAnalysis';
 
 
 const pages = [
@@ -56,6 +56,13 @@ const pages = [
     label: 'ET-06',
     description: 'Confirmación de salidas con validación de existencias.',
     roles: 'Operador',
+  },
+  {
+    to: '/analisis-ia',
+    text: 'Análisis IA',
+    label: 'IA-01',
+    description: 'Análisis inteligente del inventario.',
+    roles: 'Usuarios autenticados',
   },
 ] as const;
 
@@ -335,7 +342,9 @@ function Shell() {
                           ? <Users />
                           : p.to === '/suscripcion'
                             ? <Subscription />
-                            : null
+                            : p.to === '/analisis-ia'
+                              ? <InventoryAnalysis />
+                              : null
                 }
               />
             ))}
