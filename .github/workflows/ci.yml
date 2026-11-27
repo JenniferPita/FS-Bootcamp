@@ -1,5 +1,5 @@
 
-name: CI - StockFlow React
+name: CI/CD - StockFlow React
 
 on:
   push:
@@ -70,3 +70,56 @@ jobs:
           path: dist/
           if-no-files-found: error
           retention-days: 30
+
+  deploy:
+    name: Publicacion automatica en Amazon S3
+    needs: build
+    runs-on: ubuntu-latest
+
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/ai-cloud'
+
+    concurrency:
+      group: stockflow-s3-deploy
+      cancel-in-progress: false
+
+    env:
+      S3_BUCKET: stockflow-react-564934668615-us-east-1-an
+
+    steps:
+      - name: Descargar artifact de produccion
+        uses: actions/download-artifact@v4
+        with:
+          name: stockflow-dist
+          path: dist/
+
+      - name: Configurar credenciales AWS
+        uses: aws-actions/configure-aws-credentials@v6.3.1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - name: Verificar acceso a AWS
+        run: |
+          aws sts get-caller-identity
+          aws s3 ls "s3://$S3_BUCKET/"
+
+      - name: Verificar commit del artifact
+        run: |
+          test "$(cat dist/version.txt)" = "$GITHUB_SHA"
+
+      - name: Publicar archivos en S3
+        run: |
+          aws s3 sync dist/ "s3://$S3_BUCKET/" --exclude "version.txt" --only-show-errors
+
+      - name: Publicar identificador de version
+        run: |
+          aws s3 cp dist/version.txt "s3://$S3_BUCKET/version.txt" --cache-control "no-cache"
+
+      - name: Verificar version publicada
+        run: |
+          PUBLISHED_SHA=$(aws s3 cp "s3://$S3_BUCKET/version.txt" -)
+          test "$PUBLISHED_SHA" = "$GITHUB_SHA"
+          echo "StockFlow publicado correctamente"
+          echo "Commit publicado: $GITHUB_SHA"
